@@ -1,0 +1,47 @@
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 50px;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+}
+
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1.2rem;
+}
+
+section h2 {
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+
+section p {
+  font-size: 1rem;
+}
+
+.project-links a {
+  display: inline-block;
+  margin: 15px;
+  padding: 10px 20px;
+  background-color: #007acc;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.project-links a:hover {
+  background-color: #005f99;
+}
+
+footer {
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: #555;
+}
