@@ -38,3 +38,14 @@ header .btn:hover {
   color: #831DC3; /* match your hero purple or any color you like */
 }
 
+/* Paragraph text */
+#projects p.lead {
+  color: #343a40; /* dark grey for strong contrast on white */
+}
+
+/* Badge / mini button */
+#projects .badge {
+  background-color: #495057; /* darker grey for accessibility */
+  color: #ffffff;             /* white text for readability */
+}
+
