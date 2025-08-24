@@ -45,7 +45,7 @@ header .btn:hover {
 
 /* Badge / mini button */
 #projects .badge {
-  background-color: #495057; /* darker grey for accessibility */
+  background-color: #3e4448; /* darker grey for accessibility */
   color: #ffffff;             /* white text for readability */
 }
 
