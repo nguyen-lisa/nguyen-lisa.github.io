@@ -12,8 +12,8 @@ function countBy(items: string[]) {
 }
 
 export default function ProjectFilters({ projects }: { projects: Project[] }) {
-  // Tabs: featured | all | cat  (recent is disabled for now)
-  const [tab, setTab] = useState<"featured" | "all" | "cat">("all");
+  // Tabs: featured | all | cat  (featured & recent is disabled for now)
+  const [tab, setTab] = useState<"all" | "cat">("all");
   const [cat, setCat] = useState<string | null>(null);
   // const [tool, setTool] = useState<string>(""); // ← disabled for now
 
@@ -27,11 +27,7 @@ export default function ProjectFilters({ projects }: { projects: Project[] }) {
 
   // Base list by tab
   const base =
-    tab === "featured"
-      ? featured
-      // : tab === "recent"
-      // ? projects
-      : tab === "cat"
+    tab === "cat"
       ? projects.filter((p) => (cat ? (p.categories ?? []).includes(cat) : true))
       : projects;
 
@@ -46,9 +42,9 @@ export default function ProjectFilters({ projects }: { projects: Project[] }) {
     <div className="space-y-4">
       {/* Tabs row */}
       <div className="flex flex-wrap items-center gap-2">
-        <button onClick={() => setTab("featured")} className={tabClass(tab === "featured")}>
+        {/* <button onClick={() => setTab("featured")} className={tabClass(tab === "featured")}>
           Featured ({featured.length})
-        </button>
+        </button> */}
         <button onClick={() => setTab("all")} className={tabClass(tab === "all")}>
           All ({projects.length})
         </button>

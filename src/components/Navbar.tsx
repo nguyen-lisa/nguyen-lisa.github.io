@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-base/80 backdrop-blur border-b border-border">
-      <div className="max-w-5xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-14">
+      <div className="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-14">
         <Link href="/" className="font-semibold text-lg">
           Lisa Nguyen
         </Link>

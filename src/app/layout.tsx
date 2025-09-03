@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         {/* main grows to fill; add site-wide padding + centered width here */}
         <main id="main" className="flex-1">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-5 py-4 sm:py-5">
             {children}
           </div>
         </main>

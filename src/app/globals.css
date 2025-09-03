@@ -94,7 +94,8 @@ html { scroll-behavior: smooth; }
 }
 
 @plugin "@tailwindcss/typography";
-:root { --nav-h: 56px; }
+:root { --nav-h: 56px; }         /* your sticky navbar height */
+html { scroll-behavior: smooth; }
 .prose :is(h2,h3,h4){ scroll-margin-top: calc(var(--nav-h) + 20px); }
 @layer base{
   .prose h2{@apply mt-10 mb-3 text-2xl md:text-3xl font-semibold border-b border-border pb-2;}
