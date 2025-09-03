@@ -4,53 +4,88 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 export type TocItem = { id: string; text: string; level: number };
 
-function getNavOffset() {
-  // Keep in sync with globals.css :root --nav-h
-  const NAV_H = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 56;
-  return NAV_H + 20; // matches your scroll-margin-top
+function getNavOffset(): number {
+  // Prefer real header height if you add id="site-header" to your Navbar
+  const header = document.getElementById("site-header");
+  if (header) return header.getBoundingClientRect().height + 20;
+
+  // Fallback to CSS var --nav-h (keep it in sync in globals.css)
+  const css = getComputedStyle(document.documentElement).getPropertyValue("--nav-h");
+  const navH = parseInt(css || "56", 10) || 56;
+  return navH + 20;
 }
 
 export default function CaseToc({ items }: { items: TocItem[] }) {
   const [active, setActive] = useState<string | null>(items[0]?.id ?? null);
-  const headingEls = useRef<HTMLElement[]>([]);
 
-  // Cache the IDs we care about
+  // stable list of ids in order
   const ids = useMemo(() => items.map(i => i.id), [items]);
 
-  useEffect(() => {
-    // Collect heading elements in DOM order
-    headingEls.current = ids
-      .map(id => document.getElementById(id) as HTMLElement | null)
-      .filter(Boolean) as HTMLElement[];
+  // store computed heading tops and current offset
+  const topsRef = useRef<number[]>([]);
+  const offsetRef = useRef<number>(getNavOffset());
+  const BUFFER = 32; // px padding around section boundaries to prevent flicker
 
-    // If URL already has a hash, honor it
-    const currentHash = decodeURIComponent(window.location.hash.replace("#", ""));
-    if (currentHash && ids.includes(currentHash)) {
-      setActive(currentHash);
-    } else if (ids[0]) {
-      setActive(ids[0]);
-    }
+  const computeTops = () => {
+    offsetRef.current = getNavOffset();
+    topsRef.current = ids.map(id => {
+      const el = document.getElementById(id) as HTMLElement | null;
+      return el ? Math.max(0, el.getBoundingClientRect().top + window.scrollY) : Number.POSITIVE_INFINITY;
+    });
+  };
+
+  useEffect(() => {
+    if (!ids.length) return;
+
+    // initial positions
+    computeTops();
+
+    // honor hash on load
+    const initial = decodeURIComponent(window.location.hash.replace("#", ""));
+    if (initial && ids.includes(initial)) setActive(initial);
+    else setActive(ids[0]);
 
     let ticking = false;
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        const offset = getNavOffset();
-        const y = window.scrollY + offset;
-        // Pick the last heading whose top is above the offset line
-        let current = ids[0] ?? null;
-        for (const el of headingEls.current) {
-          if (el.offsetTop <= y) current = el.id;
-          else break; // headings are in order
+        const y = window.scrollY + offsetRef.current;
+
+        const docBottom = window.scrollY + window.innerHeight;
+        const maxScroll = document.documentElement.scrollHeight || document.body.scrollHeight;
+
+        // If at (or very near) bottom, lock to the last section (important for short pages)
+        if (docBottom >= maxScroll - 4) {
+          setActive(ids[ids.length - 1]);
+          ticking = false;
+          return;
         }
-        setActive(current);
+
+        // If above first heading, stay on the first
+        if (y < (topsRef.current[0] ?? 0) - BUFFER) {
+          setActive(ids[0]);
+          ticking = false;
+          return;
+        }
+
+        // Choose the section whose range [start, nextStart) contains the reading line
+        let currentIndex = ids.length - 1;
+        for (let i = 0; i < topsRef.current.length - 1; i++) {
+          const start = topsRef.current[i];
+          const nextStart = topsRef.current[i + 1];
+          if (y >= start - BUFFER && y < nextStart - BUFFER) {
+            currentIndex = i;
+            break;
+          }
+        }
+        setActive(ids[currentIndex]);
         ticking = false;
       });
     };
 
     const onResize = () => {
-      // Re-run on resize because offsets change
+      computeTops();
       onScroll();
     };
 
@@ -62,8 +97,9 @@ export default function CaseToc({ items }: { items: TocItem[] }) {
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
     window.addEventListener("hashchange", onHashChange);
-    // Initial compute
-    onScroll();
+
+    // Recompute once the page settles (fonts/images)
+    setTimeout(() => { computeTops(); onScroll(); }, 0);
 
     return () => {
       window.removeEventListener("scroll", onScroll);
@@ -84,36 +120,26 @@ export default function CaseToc({ items }: { items: TocItem[] }) {
               <a
                 href={`#${id}`}
                 onClick={(e) => {
-                    e.preventDefault();
-                    const el = document.getElementById(id);
-                    if (!el) return;
-
-                    // match your CSS offset: --nav-h + 20
-                    const NAV_H =
-                    parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 56;
-                    const offset = NAV_H + 20;
-
-                    const top = el.getBoundingClientRect().top + window.scrollY - offset;
-                    window.scrollTo({ top, behavior: "smooth" });
-
-                    // update active state immediately for visual feedback
-                    setActive(id);
-
-                    // update the hash without reloading
-                    history.replaceState(null, "", `#${id}`);
+                  e.preventDefault();
+                  const el = document.getElementById(id);
+                  if (!el) return;
+                  const top = el.getBoundingClientRect().top + window.scrollY - offsetRef.current;
+                  window.scrollTo({ top, behavior: "smooth" });
+                  setActive(id); // immediate feedback
+                  history.replaceState(null, "", `#${id}`);
                 }}
                 aria-current={isActive ? "true" : undefined}
                 className={[
-                    "group flex items-center gap-2 rounded px-2 py-1.5 transition outline-none",
-                    "focus-visible:ring-2 focus-visible:ring-accent",
-                    isActive
+                  "group flex items-center gap-2 rounded px-2 py-1.5 transition outline-none",
+                  "focus-visible:ring-2 focus-visible:ring-accent",
+                  isActive
                     ? "text-accent border-2 border-accent"
                     : "text-text/80 border border-border hover:text-accent hover:border-accent/60"
                 ].join(" ")}
-                >
+              >
                 <span className={["h-4 w-1 rounded", isActive ? "bg-accent" : "bg-border/30 group-hover:bg-accent/60"].join(" ")} />
                 <span>{text}</span>
-                </a>
+              </a>
             </li>
           );
         })}
