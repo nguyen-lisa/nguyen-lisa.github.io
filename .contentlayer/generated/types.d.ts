@@ -21,7 +21,7 @@ export type Project = {
   featured: boolean
   thumbnail?: string | undefined
   ogImage?: string | undefined
-  demo?: any | undefined
+  demo?: Demo | undefined
   repo?: string | undefined
   /** MDX file body */
   body: MDX
@@ -30,7 +30,15 @@ export type Project = {
 }  
 
 /** Nested types */
-  
+export type Demo = {
+  /** File path relative to `contentDirPath` */
+  _id: string
+  _raw: Local.RawDocumentData
+  type: 'Demo'
+  label?: string | undefined
+  url: string
+
+}  
 
 /** Helper types */
 
@@ -40,8 +48,8 @@ export type AllTypeNames = DocumentTypeNames | NestedTypeNames
 export type DocumentTypes = Project
 export type DocumentTypeNames = 'Project'
 
-export type NestedTypes = never
-export type NestedTypeNames = never
+export type NestedTypes = Demo
+export type NestedTypeNames = 'Demo'
 
 export type DataExports = {
   allDocuments: DocumentTypes[]
@@ -69,7 +77,7 @@ export type DocumentTypeMap = {
 }
 
 export type NestedTypeMap = {
-
+  Demo: Demo
 }
 
  
