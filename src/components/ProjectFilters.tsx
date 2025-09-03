@@ -40,9 +40,9 @@ export default function ProjectFilters({ projects }: { projects: Project[] }) {
         <button onClick={() => setTab("all")} className={tabClass(tab === "all")}>
           All ({projects.length})
         </button>
-        <button onClick={() => setTab("recent")} className={tabClass(tab === "recent")}>
+        {/* <button onClick={() => setTab("recent")} className={tabClass(tab === "recent")}>
           Most Recent
-        </button>
+        </button> */}
 
         {categories.map(([name, count]) => (
           <button
