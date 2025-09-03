@@ -12,8 +12,8 @@ export default function Navbar() {
 
         {/* Nav links */}
         <nav className="flex gap-6 text-sm">
-          <Link href="/" className="link">Home</Link>
-          <a href="/resume.pdf" className="link" target="_blank" rel="noreferrer">Resume</a>
+         <Link href="/" className="link">Home</Link>
+         <a href="/resume.pdf" className="link" target="_blank" rel="noreferrer">Resume</a>
         </nav>
       </div>
     </header>

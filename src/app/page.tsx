@@ -4,7 +4,6 @@ import ProjectFilters from "@/components/ProjectFilters";
 import { toolLabel } from "@/data/tools";
 
 export default function HomePage() {
-  // Sort newest → oldest once; filters rely on this order
   const projects = [...allProjects].sort((a, b) => b.date.localeCompare(a.date));
   const featured = projects.filter(p => p.featured);
 
@@ -18,7 +17,7 @@ export default function HomePage() {
         <p className="text-lg text-text/80">Accessibility-first · UI/UX · Front-end</p>
         <p className="text-text/90">I ship accessible, fast UIs users love.</p>
 
-        {/* quick toolkit chips (edit which tools to showcase) */}
+        {/* toolkit chips */}
         <ul className="mt-3 flex flex-wrap justify-center gap-2">
           {["nextjs", "tailwind", "ts"].map(k => (
             <li key={k} className="text-xs rounded-full border border-border px-2 py-1">
@@ -43,7 +42,7 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* PROJECTS with tabs + tool filter */}
+      {/* PROJECTS */}
       <section aria-labelledby="projects-heading">
         <h2 id="projects-heading" className="text-2xl font-semibold mb-4">Projects</h2>
         <ProjectFilters projects={projects} />

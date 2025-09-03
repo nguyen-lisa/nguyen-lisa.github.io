@@ -14,43 +14,33 @@ export default function ProjectFilters({ projects }: { projects: Project[] }) {
   const [tool, setTool] = useState<string>("");
 
   const featured = projects.filter(p => p.featured);
-
   const categories = useMemo(() => {
     const cats = projects.flatMap(p => p.categories ?? []);
     const counts = countBy(cats);
     return Object.entries(counts).sort((a, b) => a[0].localeCompare(b[0]));
   }, [projects]);
 
-  // choose the base list for the current tab
   const base =
     tab === "featured" ? featured :
-    tab === "recent"   ? projects : // already sorted by date upstream
+    tab === "recent"   ? projects :
     tab === "cat"      ? projects.filter(p => (cat ? (p.categories ?? []).includes(cat) : true)) :
                           projects;
 
-  // apply tool filter
   const filtered = tool ? base.filter(p => (p.tools ?? []).includes(tool)) : base;
+
+  const tabClass = (active: boolean) =>
+    `btn btn-outline px-3 py-1.5 ${active ? "border-2 border-accent text-accent" : ""}`;
 
   return (
     <div className="space-y-4">
-      {/* Tabs + Tool filter row */}
       <div className="flex flex-wrap items-center gap-2">
-        <button
-          onClick={() => setTab("featured")}
-          className={`btn btn-outline px-3 py-1.5 ${tab === "featured" ? "border-2 border-accent text-accent" : ""}`}
-        >
+        <button onClick={() => setTab("featured")} className={tabClass(tab === "featured")}>
           Featured ({featured.length})
         </button>
-        <button
-          onClick={() => setTab("all")}
-          className={`btn btn-outline px-3 py-1.5 ${tab === "all" ? "border-2 border-accent text-accent" : ""}`}
-        >
+        <button onClick={() => setTab("all")} className={tabClass(tab === "all")}>
           All ({projects.length})
         </button>
-        <button
-          onClick={() => setTab("recent")}
-          className={`btn btn-outline px-3 py-1.5 ${tab === "recent" ? "border-2 border-accent text-accent" : ""}`}
-        >
+        <button onClick={() => setTab("recent")} className={tabClass(tab === "recent")}>
           Most Recent
         </button>
 
@@ -58,7 +48,7 @@ export default function ProjectFilters({ projects }: { projects: Project[] }) {
           <button
             key={name}
             onClick={() => { setTab("cat"); setCat(name); }}
-            className={`btn btn-outline px-3 py-1.5 ${tab === "cat" && cat === name ? "border-2 border-accent text-accent" : ""}`}
+            className={tabClass(tab === "cat" && cat === name)}
           >
             {name} ({count})
           </button>
@@ -78,7 +68,6 @@ export default function ProjectFilters({ projects }: { projects: Project[] }) {
         </div>
       </div>
 
-      {/* Grid */}
       <div className="grid sm:grid-cols-2 gap-6">
         {filtered.map(p => <ProjectCard key={p._id} project={p} />)}
       </div>
