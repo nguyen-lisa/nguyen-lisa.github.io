@@ -1,3 +1,5 @@
-<a href="/resume" className="link" target="_blank" rel="noreferrer">
-  Resume
-</a>
+import { redirect } from "next/navigation";
+
+export default function ResumeRedirect() {
+  redirect("/LisaNguyenResume.pdf");
+}
