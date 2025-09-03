@@ -54,7 +54,7 @@ export default function ProjectFilters({ projects }: { projects: Project[] }) {
           </button>
         ))}
 
-        <div className="ml-auto flex items-center gap-2">
+        {/* <div className="ml-auto flex items-center gap-2">
           <label htmlFor="tool" className="text-sm">Filter by tool</label>
           <select
             id="tool"
@@ -66,7 +66,7 @@ export default function ProjectFilters({ projects }: { projects: Project[] }) {
             {toolKeys.map(k => <option key={k} value={k}>{toolLabel(k)}</option>)}
           </select>
         </div>
-      </div>
+      </div> */}
 
       <div className="grid sm:grid-cols-2 gap-6">
         {filtered.map(p => <ProjectCard key={p._id} project={p} />)}
