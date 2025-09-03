@@ -12,7 +12,7 @@ export default function HomePage() {
       {/* HERO */}
       <section aria-labelledby="home-hero" className="text-center space-y-4">
         <h1 id="home-hero" className="text-4xl md:text-5xl font-bold tracking-tight">
-          Your Name
+          Lisa Nguyen
         </h1>
         <p className="text-lg text-text/80">Accessibility-first · UI/UX · Front-end</p>
         <p className="text-text/90">I ship accessible, fast UIs users love.</p>

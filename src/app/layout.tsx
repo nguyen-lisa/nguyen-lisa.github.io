@@ -6,14 +6,14 @@ import Footer from "@/components/Footer";
 import SkipLink from "@/components/SkipLink";
 
 export const metadata: Metadata = {
-  title: "Your Name – Portfolio",
+  title: "Lisa Nguyen - Portfolio",
   description: "Accessibility-first · UI/UX · Front-end",
   metadataBase: new URL("https://your-domain.example"), // replace later
   openGraph: {
-    title: "Your Name – Portfolio",
+    title: "Lisa Nguyen - Portfolio",
     description: "Accessibility-first · UI/UX · Front-end",
     url: "https://your-domain.example",
-    siteName: "Your Name",
+    siteName: "Lisa Nguyen",
     images: ["/og/home.png"], // optional; add when ready
   },
   twitter: { card: "summary_large_image" },
