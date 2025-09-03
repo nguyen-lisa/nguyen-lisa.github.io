@@ -1,9 +1,9 @@
+// contentlayer.config.ts
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-
-export const Project = defineDocumentType(() => ({
+var Project = defineDocumentType(() => ({
   name: "Project",
   filePathPattern: `projects/**/*.mdx`,
   contentType: "mdx",
@@ -16,7 +16,8 @@ export const Project = defineDocumentType(() => ({
     featured: { type: "boolean", default: false },
     thumbnail: { type: "string" },
     ogImage: { type: "string" },
-    demo: { type: "json" }, // { label, url }
+    demo: { type: "json" },
+    // { label, url }
     repo: { type: "string" }
   },
   computedFields: {
@@ -30,8 +31,7 @@ export const Project = defineDocumentType(() => ({
     }
   }
 }));
-
-export default makeSource({
+var contentlayer_config_default = makeSource({
   contentDirPath: "content",
   documentTypes: [Project],
   mdx: {
@@ -39,3 +39,8 @@ export default makeSource({
     rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: "wrap" }]]
   }
 });
+export {
+  Project,
+  contentlayer_config_default as default
+};
+//# sourceMappingURL=compiled-contentlayer-config-EQKH3I2M.mjs.map
