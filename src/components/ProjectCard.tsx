@@ -12,15 +12,20 @@ export default function ProjectCard({ project }: { project: Project }) {
 
       <p className="mt-2 text-sm text-text/80">{project.summary}</p>
 
-      {project.tools?.length ? (
+      {(project.tools?.length ?? 0) > 0 && (
         <ul className="mt-3 flex flex-wrap gap-2">
-          {project.tools.map((t) => (
-            <li key={t} className="text-xs rounded-full border border-border px-2 py-1">
-              {toolLabel(t as any)}
-            </li>
-          ))}
+          {project.tools!.map((raw) => {
+            const key = String(raw).trim().toLowerCase();
+            const label = toolLabel(key);
+            if (!label) return null;
+            return (
+              <li key={key} className="text-xs rounded-full border border-border px-2 py-1">
+                {label}
+              </li>
+            );
+          })}
         </ul>
-      ) : null}
+      )}
 
       <div className="mt-4 flex flex-wrap gap-2">
         <Link href={project.url} className="btn btn-outline">Case Study</Link>

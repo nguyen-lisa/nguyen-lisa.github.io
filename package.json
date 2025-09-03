@@ -10,6 +10,7 @@
     "content": "contentlayer build"
   },
   "dependencies": {
+    "github-slugger": "^2.0.0",
     "next": "15.5.2",
     "next-mdx-remote": "^5.0.0",
     "react": "19.1.0",

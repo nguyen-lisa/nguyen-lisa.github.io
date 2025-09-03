@@ -1,19 +1,25 @@
-// src/data/tools.ts
+// Define your known tools here
 export const TOOLS = {
   nextjs:   { label: "Next.js" },
-  react:    { label: "React" },
   tailwind: { label: "Tailwind CSS" },
-  figma:    { label: "Figma" },
-  java:     { label: "Java" },
-  node:     { label: "Node.js" },
   ts:       { label: "TypeScript" },
-  css:      { label: "CSS" },
+  react:    { label: "React" },
+  // add more…
 } as const;
 
 export type ToolKey = keyof typeof TOOLS;
 
-export const toolKeys = Object.keys(TOOLS) as ToolKey[];
-
-export function toolLabel(key: ToolKey) {
-  return TOOLS[key].label;
+// Pretty fallback if a key isn’t in TOOLS
+function humanize(s: string) {
+  return s
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, c => c.toUpperCase())
+    .trim();
 }
+
+export function toolLabel(key: string) {
+  const k = key.trim().toLowerCase();
+  return TOOLS[k as ToolKey]?.label ?? humanize(k);
+}
+
+export const toolKeys = Object.keys(TOOLS) as ToolKey[];

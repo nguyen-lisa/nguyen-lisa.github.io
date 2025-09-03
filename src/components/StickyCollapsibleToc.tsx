@@ -30,15 +30,15 @@ export default function StickyCollapsibleToc({ items }: { items: TocItem[] }) {
       {/* Rail header */}
       <div className="flex items-center gap-2 mb-2 px-1">
         <button
-          type="button"
-          onClick={() => setOpen(v => !v)}
-          aria-expanded={open}
-          className="btn btn-outline px-2 py-1 text-xs"
-          title={open ? "Collapse table of contents" : "Expand table of contents"}
+        type="button"
+        onClick={() => setOpen(v => !v)}
+        aria-expanded={open}
+        className="btn btn-outline px-2 py-1 text-xs"
+        title={open ? "Collapse menu" : "Expand menu"}
         >
-          {open ? "Hide" : "TOC"}
+        {open ? "Hide" : "Menu"}
         </button>
-        {open && <span className="text-xs text-text/60">On this page</span>}
+        {open && <span className="text-xs text-text/60">Page Menu</span>}
       </div>
 
       {/* Scrollable TOC inside fixed-width column */}

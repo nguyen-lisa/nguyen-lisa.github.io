@@ -3,23 +3,27 @@ import { allProjects } from "contentlayer/generated";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
+import GithubSlugger from "github-slugger";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import StickyCollapsibleToc from "@/components/StickyCollapsibleToc"; // ⬅️ use the wrapper
 import type { TocItem } from "@/components/CaseToc"; // type only
-import { slugify } from "@/lib/slug";
 
-function extractHeadings(raw: string): TocItem[] {
+function extractHeadings(raw: string) {
+  const slugger = new GithubSlugger();
   const items: TocItem[] = [];
   let inCode = false;
+
   for (const line of raw.split("\n")) {
     const t = line.trim();
     if (t.startsWith("```")) { inCode = !inCode; continue; }
     if (inCode) continue;
+
     const m = /^(#{2,4})\s+(.+)$/.exec(t);
     if (!m) continue;
+
     const level = m[1].length; // 2–4
     const text = m[2].replace(/[#*`]+/g, "").trim();
-    const id = slugify(text);
+    const id = slugger.slug(text);       // <- EXACT match to rehype-slug
     items.push({ id, text, level });
   }
   return items;
