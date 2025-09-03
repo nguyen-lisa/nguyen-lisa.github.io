@@ -10,12 +10,10 @@ import { slugify } from "@/lib/slug";
 function extractHeadings(raw: string): TocItem[] {
   const items: TocItem[] = [];
   let inCode = false;
-
   for (const line of raw.split("\n")) {
     const t = line.trim();
     if (t.startsWith("```")) { inCode = !inCode; continue; }
     if (inCode) continue;
-
     const m = /^(#{2,4})\s+(.+)$/.exec(t);
     if (!m) continue;
     const level = m[1].length; // 2–4
@@ -41,7 +39,9 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       {/* Mobile TOC (collapsible) */}
       {toc.length > 0 && (
         <details className="lg:hidden border border-border rounded">
-          <summary className="px-3 py-2 cursor-pointer">On this page</summary>
+          <summary className="px-3 py-2 cursor-pointer select-none">
+            On this page
+          </summary>
           <div className="p-3">
             <CaseToc items={toc} />
           </div>
