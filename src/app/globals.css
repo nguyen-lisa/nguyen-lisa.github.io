@@ -1,26 +1,93 @@
+/* Tailwind v4 runtime */
 @import "tailwindcss";
 
+/* --- Design tokens (Tailwind v4) --- */
+/* We keep raw CSS vars for easy theming, and expose them as Tailwind color tokens via @theme. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Your site-wide palette (dark, high-contrast) */
+  --background: #111111; /* dark grey */
+  --foreground: #ffffff; /* white text */
+  --border:     #ffffff; /* white border */
+  --accent:     #38bdf8; /* Sky 400 */
+  --accent-hover: #7dd3fc; /* Sky 300 (optional; you can keep 400 for hover if you prefer) */
+
+  /* Font families if you want them later
+     --font-sans: ui-sans-serif, system-ui, ...;
+     --font-mono: ui-monospace, ...;
+  */
 }
 
+/* Map those CSS vars to Tailwind theme tokens so you can use bg-base, text-text, etc. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-base: var(--background);
+  --color-text: var(--foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+
+  /* If you set fonts:
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* --- Global defaults --- */
+html, body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Smooth scrolling but respect reduced motion */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* --- Optional: “component classes” for buttons/links so you don’t repeat utilities --- */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded px-4 py-2 transition
+           outline-none focus-visible:ring-2 focus-visible:ring-accent;
+  }
+
+  /* Outline button: white border/text on dark, accent + thicker border on hover */
+  .btn-outline {
+    @apply border border-border text-text bg-base;
+  }
+  .btn-outline:hover {
+    /* Non-color cue: thicker border, plus accent color for border/text */
+    @apply border-2 text-accent border-accent;
+  }
+
+  /* Accent-filled button (use sparingly) */
+  .btn-accent {
+    @apply bg-accent text-base font-semibold;
+  }
+  .btn-accent:hover {
+    /* Use accent-hover if you like a brighter hover; otherwise keep bg-accent */
+    background: var(--accent-hover);
+  }
+
+  /* Links: underline by default, thicker underline + accent on hover */
+  .link {
+    @apply underline underline-offset-2 decoration-2 transition;
+  }
+  .link:hover {
+    @apply text-accent decoration-4;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* --- MDX (prose) on dark background --- */
+.prose {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-links: var(--accent);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-counters: #cccccc;
+  --tw-prose-bullets: #cccccc;
+  --tw-prose-hr: #444444;
+  --tw-prose-quotes: #cccccc;
+  --tw-prose-code: var(--accent);
+  --tw-prose-pre-code: var(--foreground);
+  --tw-prose-pre-bg: #1a1a1a;
 }

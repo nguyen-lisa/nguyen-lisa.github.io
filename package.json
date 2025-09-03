@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"contentlayer dev\" \"next dev\"",
-    "build": "contentlayer build && next build",
+    "dev": "concurrently \"contentlayer dev\" \"next dev --turbopack\"",
+    "build": "contentlayer build && next build --turbopack",
     "start": "next start",
+    "lint": "eslint",
     "content": "contentlayer build"
   },
   "dependencies": {
