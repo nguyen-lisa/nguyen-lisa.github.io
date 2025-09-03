@@ -43,10 +43,10 @@ export default function HomePage() {
       )}
 
       {/* PROJECTS */}
-      <section aria-labelledby="projects-heading">
+      {/* <section aria-labelledby="projects-heading">
         <h2 id="projects-heading" className="text-2xl font-semibold mb-4">Projects</h2>
         <ProjectFilters projects={projects} />
-      </section>
+      </section> */}
     </div>
   );
 }
