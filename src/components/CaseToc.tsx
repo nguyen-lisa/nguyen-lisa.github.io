@@ -6,77 +6,69 @@ export type TocItem = { id: string; text: string; level: number };
 
 export default function CaseToc({ items }: { items: TocItem[] }) {
   const [active, setActive] = useState<string | null>(items[0]?.id ?? null);
-
-  // runtime state/refs (browser only)
-  const offsetRef = useRef<number>(76);   // default: 56 (nav) + 20 margin
   const ids = useMemo(() => items.map(i => i.id), [items]);
-  const topsRef = useRef<number[]>([]);
+  const offsetRef = useRef(76);            // ~56 header + 20
+  const lockUntilRef = useRef(0);          // ignore IO updates while smooth-scrolling
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Compute sticky/scroll offset safely in the browser
+    // Compute offset from real header or CSS var
     const root = document.documentElement;
     const navVar = getComputedStyle(root).getPropertyValue("--nav-h");
-    const cssNav = parseInt(navVar) || 56;
+    const cssNav = parseInt(navVar || "", 10) || 56;
     const header = document.getElementById("site-header");
-    const headerH = header?.getBoundingClientRect().height;
-    offsetRef.current = (headerH ? Math.round(headerH) : cssNav) + 20;
+    const headerH = header?.getBoundingClientRect().height ?? cssNav;
+    offsetRef.current = Math.round(headerH) + 20;
 
-    // Collect headings + their absolute top positions
-    const els = ids
-      .map(id => document.getElementById(id) as HTMLElement | null)
-      .filter(Boolean) as HTMLElement[];
+    const headings = ids
+      .map(id => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
 
-    const computeTops = () => {
-      topsRef.current = els.map(el => el.getBoundingClientRect().top + window.scrollY);
-    };
-    computeTops();
+    // Use IO only as a "tick"; we still compute the current section from window scroll
+    const io = new IntersectionObserver(
+      () => {
+        // Respect the click lock so we don't snap back to the first section
+        if (Date.now() < lockUntilRef.current) return;
 
-    let ticking = false;
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const y = window.scrollY + offsetRef.current;
-        const tops = topsRef.current;
-        if (!tops.length) { ticking = false; return; }
+        const y = window.scrollY + offsetRef.current + 1;
 
-        // bottom-of-page: lock to last
+        // If we're at (or extremely near) the bottom, force last section
         const docBottom = window.scrollY + window.innerHeight;
         const maxScroll = Math.max(
           document.documentElement.scrollHeight,
           document.body.scrollHeight
         );
-        if (docBottom >= maxScroll - 4) {
-          setActive(ids[ids.length - 1]);
-          ticking = false;
+        if (docBottom >= maxScroll - 2) {
+          setActive(ids[ids.length - 1] ?? null);
           return;
         }
 
-        // Find the current section
-        let idx = 0;
-        for (let i = 0; i < tops.length; i++) {
-          if (y >= tops[i]) idx = i;
+        // Otherwise: pick the last heading whose top is <= y
+        let current: string | null = ids[0] ?? null;
+        for (const h of headings) {
+          if (h.offsetTop <= y) current = h.id;
           else break;
         }
-        setActive(ids[idx]);
-        ticking = false;
-      });
-    };
+        setActive(current);
+      },
+      { root: null, rootMargin: `-${offsetRef.current}px 0px -60% 0px`, threshold: [0, 1] }
+    );
 
-    const onResize = () => {
-      computeTops();
-      onScroll();
-    };
+    headings.forEach(h => io.observe(h));
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
-    onScroll();
+    const onHashChange = () => {
+      const hash = decodeURIComponent(location.hash.replace("#", ""));
+      if (hash && ids.includes(hash)) setActive(hash);
+    };
+    window.addEventListener("hashchange", onHashChange);
+
+    // Initial sync
+    onHashChange();
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
+      io.disconnect();
+      window.removeEventListener("hashchange", onHashChange);
     };
   }, [ids]);
 
@@ -93,12 +85,16 @@ export default function CaseToc({ items }: { items: TocItem[] }) {
                 href={`#${id}`}
                 onClick={(e) => {
                   e.preventDefault();
-                  if (typeof window === "undefined") return;
                   const el = document.getElementById(id);
                   if (!el) return;
-                  const top = el.getBoundingClientRect().top + window.scrollY - offsetRef.current;
-                  window.scrollTo({ top, behavior: "smooth" });
+
+                  // Lock highlight during smooth scroll to avoid "snap back"
+                  lockUntilRef.current = Date.now() + 650;
                   setActive(id);
+
+                  const top = el.getBoundingClientRect().top + window.scrollY - offsetRef.current;
+                  window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+
                   history.replaceState(null, "", `#${id}`);
                 }}
                 aria-current={isActive ? "true" : undefined}
@@ -110,12 +106,7 @@ export default function CaseToc({ items }: { items: TocItem[] }) {
                     : "text-text/80 border border-border hover:text-accent hover:border-accent/60",
                 ].join(" ")}
               >
-                <span
-                  className={[
-                    "h-4 w-1 rounded",
-                    isActive ? "bg-accent" : "bg-border/30 group-hover:bg-accent/60",
-                  ].join(" ")}
-                />
+                <span className={["h-4 w-1 rounded", isActive ? "bg-accent" : "bg-border/30 group-hover:bg-accent/60"].join(" ")} />
                 <span>{text}</span>
               </a>
             </li>

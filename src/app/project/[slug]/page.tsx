@@ -6,6 +6,8 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import CaseToc, { TocItem } from "@/components/CaseToc";
 import GithubSlugger from "github-slugger";
+import ImageGrid from "@/components/ImageGrid";
+import Subhead from "@/components/Subhead";
 
 function extractHeadings(raw: string): TocItem[] {
   const items: TocItem[] = [];
@@ -17,7 +19,7 @@ function extractHeadings(raw: string): TocItem[] {
     if (inCode) continue;
     const m = /^(#{2,4})\s+(.+)$/.exec(t);
     if (!m) continue;
-    const level = m[1].length; // h2–h4
+    const level = m[1].length;           // h2–h4
     const text = m[2].replace(/[#*`]+/g, "").trim();
     items.push({ id: slugger.slug(text), text, level });
   }
@@ -36,10 +38,10 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
 
   return (
     <>
-      {/* Mobile collapsible Menu */}
+      {/* Mobile: collapsible Menu */}
       {toc.length > 0 && (
-        <div className="md:hidden sticky top-20 z-10 mb-4">
-          <details className="border border-border/60 rounded bg-base">
+        <div className="lg:hidden sticky top-20 z-10 mb-4">
+          <details className="border border-border/60 rounded bg-base/95 backdrop-blur">
             <summary className="px-3 py-2 cursor-pointer select-none">Menu</summary>
             <div className="p-3">
               <nav aria-label="Page menu">
@@ -50,12 +52,12 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         </div>
       )}
 
-      {/* Two columns from md+ (exactly like the smoke test) */}
-      <div className="grid grid-cols-1 md:grid-cols-[260px,1fr] gap-6 items-start">
-        {/* LEFT: sticky rail (no overlay, no backdrop/filter) */}
-        <aside className="hidden md:block">
-          <div className="sticky top-20">
-            <div className="rounded-xl border border-border/60 p-3">
+      {/* Two columns from lg+ — NOTE: no `items-start` here */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* LEFT rail (lg+): own column + sticky wrapper (parent now stretches) */}
+        <aside className="hidden lg:block lg:col-span-3">
+          <div className="sticky top-24">
+            <div className="max-h-[calc(100vh-10rem)] overflow-auto rounded-xl border border-border/60 bg-base/60 backdrop-blur p-3">
               <nav aria-label="Page menu">
                 <CaseToc items={toc} />
               </nav>
@@ -63,8 +65,8 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           </div>
         </aside>
 
-        {/* RIGHT: article */}
-        <article className="prose max-w-none">
+        {/* RIGHT content */}
+        <article className="prose max-w-none lg:col-span-9">
           <header className="mb-6">
             <h1 className="mb-2">{project.title}</h1>
             {project.summary && <p className="text-text/80">{project.summary}</p>}
@@ -92,9 +94,9 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
               />
             )}
           </header>
-
           <MDXRemote
             source={project.body.raw}
+            components={{ Subhead, ImageGrid }}
             options={{
               mdxOptions: {
                 remarkPlugins: [remarkGfm],

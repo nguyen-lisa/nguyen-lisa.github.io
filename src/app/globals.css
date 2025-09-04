@@ -85,4 +85,9 @@ html{ scroll-behavior:smooth; }
   .img-grid img{ @apply w-full h-auto rounded-lg border border-border; }
   .img-grid figure{ margin:0; }
   .img-grid figcaption{ @apply text-xs text-text/70 mt-1; }
+
+   /* MDX subhead spacing */
+  .prose .subhead { display: block; margin-bottom: 0.25rem; }
+  .prose h2 + .subhead { margin-top: -0.4rem; }
+  .prose h3 + .subhead { margin-top: -0.35rem; }
 }
