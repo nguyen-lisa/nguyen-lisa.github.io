@@ -1,10 +1,10 @@
 import { allProjects } from "contentlayer/generated";
 import ProjectCard from "@/components/ProjectCard";
-import ProjectFilters from "@/components/ProjectFilters";
+//import ProjectFilters from "@/components/ProjectFilters";
 import { toolLabel } from "@/data/tools";
 
 export default function HomePage() {
-  const projects = [...allProjects].sort((a, b) => b.date.localeCompare(a.date));
+  const projects = [...allProjects].sort((a,b) => b.date.localeCompare(a.date));
   const featured = projects.filter(p => p.featured);
 
   return (

@@ -39,7 +39,7 @@ var Project = defineDocumentType(() => ({
   }
 }));
 var contentlayer_config_default = makeSource({
-  contentDirPath: "content",
+  contentDirPath: "src/content",
   documentTypes: [Project],
   mdx: {
     remarkPlugins: [remarkGfm],
@@ -56,4 +56,4 @@ export {
   Project,
   contentlayer_config_default as default
 };
-//# sourceMappingURL=compiled-contentlayer-config-U5HKIHIS.mjs.map
+//# sourceMappingURL=compiled-contentlayer-config-TTE6Q6LZ.mjs.map

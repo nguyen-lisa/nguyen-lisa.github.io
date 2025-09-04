@@ -4,6 +4,8 @@ export const TOOLS = {
   tailwind: { label: "Tailwind CSS" },
   ts:       { label: "TypeScript" },
   react:    { label: "React" },
+  a11y:     { label: "Accessibility" },
+  figma:    { label: "Figma" },
   // add more…
 } as const;
 
