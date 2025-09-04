@@ -4,46 +4,34 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 export type TocItem = { id: string; text: string; level: number };
 
-function getNavOffset(): number {
-  // Prefer real header height if you add id="site-header" to your Navbar
-  const header = document.getElementById("site-header");
-  if (header) return header.getBoundingClientRect().height + 20;
-
-  // Fallback to CSS var --nav-h (keep it in sync in globals.css)
-  const css = getComputedStyle(document.documentElement).getPropertyValue("--nav-h");
-  const navH = parseInt(css || "56", 10) || 56;
-  return navH + 20;
-}
-
 export default function CaseToc({ items }: { items: TocItem[] }) {
   const [active, setActive] = useState<string | null>(items[0]?.id ?? null);
 
-  // stable list of ids in order
+  // runtime state/refs (browser only)
+  const offsetRef = useRef<number>(76);   // default: 56 (nav) + 20 margin
   const ids = useMemo(() => items.map(i => i.id), [items]);
-
-  // store computed heading tops and current offset
   const topsRef = useRef<number[]>([]);
-  const offsetRef = useRef<number>(getNavOffset());
-  const BUFFER = 32; // px padding around section boundaries to prevent flicker
-
-  const computeTops = () => {
-    offsetRef.current = getNavOffset();
-    topsRef.current = ids.map(id => {
-      const el = document.getElementById(id) as HTMLElement | null;
-      return el ? Math.max(0, el.getBoundingClientRect().top + window.scrollY) : Number.POSITIVE_INFINITY;
-    });
-  };
 
   useEffect(() => {
-    if (!ids.length) return;
+    if (typeof window === "undefined") return;
 
-    // initial positions
+    // Compute sticky/scroll offset safely in the browser
+    const root = document.documentElement;
+    const navVar = getComputedStyle(root).getPropertyValue("--nav-h");
+    const cssNav = parseInt(navVar) || 56;
+    const header = document.getElementById("site-header");
+    const headerH = header?.getBoundingClientRect().height;
+    offsetRef.current = (headerH ? Math.round(headerH) : cssNav) + 20;
+
+    // Collect headings + their absolute top positions
+    const els = ids
+      .map(id => document.getElementById(id) as HTMLElement | null)
+      .filter(Boolean) as HTMLElement[];
+
+    const computeTops = () => {
+      topsRef.current = els.map(el => el.getBoundingClientRect().top + window.scrollY);
+    };
     computeTops();
-
-    // honor hash on load
-    const initial = decodeURIComponent(window.location.hash.replace("#", ""));
-    if (initial && ids.includes(initial)) setActive(initial);
-    else setActive(ids[0]);
 
     let ticking = false;
     const onScroll = () => {
@@ -51,35 +39,28 @@ export default function CaseToc({ items }: { items: TocItem[] }) {
       ticking = true;
       requestAnimationFrame(() => {
         const y = window.scrollY + offsetRef.current;
+        const tops = topsRef.current;
+        if (!tops.length) { ticking = false; return; }
 
+        // bottom-of-page: lock to last
         const docBottom = window.scrollY + window.innerHeight;
-        const maxScroll = document.documentElement.scrollHeight || document.body.scrollHeight;
-
-        // If at (or very near) bottom, lock to the last section (important for short pages)
+        const maxScroll = Math.max(
+          document.documentElement.scrollHeight,
+          document.body.scrollHeight
+        );
         if (docBottom >= maxScroll - 4) {
           setActive(ids[ids.length - 1]);
           ticking = false;
           return;
         }
 
-        // If above first heading, stay on the first
-        if (y < (topsRef.current[0] ?? 0) - BUFFER) {
-          setActive(ids[0]);
-          ticking = false;
-          return;
+        // Find the current section
+        let idx = 0;
+        for (let i = 0; i < tops.length; i++) {
+          if (y >= tops[i]) idx = i;
+          else break;
         }
-
-        // Choose the section whose range [start, nextStart) contains the reading line
-        let currentIndex = ids.length - 1;
-        for (let i = 0; i < topsRef.current.length - 1; i++) {
-          const start = topsRef.current[i];
-          const nextStart = topsRef.current[i + 1];
-          if (y >= start - BUFFER && y < nextStart - BUFFER) {
-            currentIndex = i;
-            break;
-          }
-        }
-        setActive(ids[currentIndex]);
+        setActive(ids[idx]);
         ticking = false;
       });
     };
@@ -89,29 +70,20 @@ export default function CaseToc({ items }: { items: TocItem[] }) {
       onScroll();
     };
 
-    const onHashChange = () => {
-      const h = decodeURIComponent(window.location.hash.replace("#", ""));
-      if (h && ids.includes(h)) setActive(h);
-    };
-
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
-    window.addEventListener("hashchange", onHashChange);
-
-    // Recompute once the page settles (fonts/images)
-    setTimeout(() => { computeTops(); onScroll(); }, 0);
+    onScroll();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
-      window.removeEventListener("hashchange", onHashChange);
     };
   }, [ids]);
 
   if (!items.length) return null;
 
   return (
-    <nav aria-label="Page Menu" className="text-sm">
+    <nav aria-label="Page menu" className="text-sm">
       <ul className="space-y-1">
         {items.map(({ id, text, level }) => {
           const isActive = active === id;
@@ -121,11 +93,12 @@ export default function CaseToc({ items }: { items: TocItem[] }) {
                 href={`#${id}`}
                 onClick={(e) => {
                   e.preventDefault();
+                  if (typeof window === "undefined") return;
                   const el = document.getElementById(id);
                   if (!el) return;
                   const top = el.getBoundingClientRect().top + window.scrollY - offsetRef.current;
                   window.scrollTo({ top, behavior: "smooth" });
-                  setActive(id); // immediate feedback
+                  setActive(id);
                   history.replaceState(null, "", `#${id}`);
                 }}
                 aria-current={isActive ? "true" : undefined}
@@ -134,10 +107,15 @@ export default function CaseToc({ items }: { items: TocItem[] }) {
                   "focus-visible:ring-2 focus-visible:ring-accent",
                   isActive
                     ? "text-accent border-2 border-accent"
-                    : "text-text/80 border border-border hover:text-accent hover:border-accent/60"
+                    : "text-text/80 border border-border hover:text-accent hover:border-accent/60",
                 ].join(" ")}
               >
-                <span className={["h-4 w-1 rounded", isActive ? "bg-accent" : "bg-border/30 group-hover:bg-accent/60"].join(" ")} />
+                <span
+                  className={[
+                    "h-4 w-1 rounded",
+                    isActive ? "bg-accent" : "bg-border/30 group-hover:bg-accent/60",
+                  ].join(" ")}
+                />
                 <span>{text}</span>
               </a>
             </li>

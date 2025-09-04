@@ -9,11 +9,9 @@ export default function Navbar() {
           Lisa Nguyen
         </Link>
 
-        <nav className="flex gap-6 text-sm">
+        <nav className="flex gap-6 text-sm" aria-label="Main navigation">
          <Link href="/" className="link">Home</Link>
-        <a href="/resume" className="link" target="_blank" rel="noreferrer">
-            Resume
-        </a>
+         <Link href="/resume.pdf" className="btn btn-white">View résumé</Link>
         </nav>
       </div>
     </header>
