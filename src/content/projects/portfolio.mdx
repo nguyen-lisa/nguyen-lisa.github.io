@@ -1,6 +1,6 @@
 ---
 title: "My Portfolio Website"
-summary: "Personal website portfolio (that you are viewing right now!) built with Next.js and Tailwind."
+summary: "Fast, accessible portfolio built with Next.js, MDX, and Tailwind. Showcases UI/UX work with keyboard-first navigation and accessibility throughout."
 date: "2025-09-03"
 categories: ["Front-end", "UI/UX"]
 tools: ["nextjs", "tailwind", "ts", "figma", "a11y"]
@@ -11,11 +11,21 @@ demo:
 ---
 
 ## Executive Summary
-This project focused on designing and developing a personal portfolio website to serve as a central hub for my professional work. The site highlights my UI/UX projects, provides direct access to my resume, and demonstrates my technical capabilities. Accessibility, responsiveness, and usability were prioritized to ensure recruiters, peers, and collaborators could navigate and understand my work with ease. The result is a polished, accessibility-first website that supports professional growth.
+- Built an accessibility-first portfolio to centralize work and speed recruiter review.
+- Clear paths to **Résumé**, **Featured projects**, and **Case studies** with demos.
+- High-contrast theme, visible focus rings, keyboard navigation, alt text throughout.
+
+<Subhead>Project at a glance</Subhead>
+
+- **Role:** Designer · Front-end · Prototyper  
+- **Stack:** Next.js, TypeScript, Tailwind, MDX  
+- **Accessibility:** Designed to conform to **WCAG 2.0 Level AA (AODA)**; skip link, keyboard-friendly TOC, reduced-motion support  
+- **Timeline:** 2 weeks (see breakdown below)  
+- **Links:** [Résumé](/resume.pdf) · [Figma Prototype](https://www.figma.com/proto/ev3JHCYyJgBYDc1gCM5ARH/Portfolio?node-id=0-1&t=DGX0Ilqi9XBD2rzU-1)
 
 ## Project Overview
 <Subhead>Problem Statement</Subhead>
-Recruiters often requested a portfolio to validate my abilities, but I did not yet have one. I created this project to centralize my work, showcase UI/UX projects, highlight my resume, and serve as a supplement to my CV.
+Recruiters often requested a portfolio to validate my abilities, but I didn’t yet have one. I created this project to centralize my work, showcase UI/UX projects, highlight my résumé, and supplement my CV.
 
 <Subhead>Goal</Subhead>
 Design and launch a clean, accessible, and responsive portfolio website that communicates my skills and professional presence effectively.
@@ -24,74 +34,96 @@ Design and launch a clean, accessible, and responsive portfolio website that com
 Designer, Programmer, Prototyper
 
 <Subhead>Tools</Subhead>
-- *Design:* Balsamiq for low-fidelity wireframes and layout exploration; Figma for refined wireframes, interactive prototypes, and high-fidelity mockups
-- *Development:* Next.js (React framework) with TypeScript, Tailwind CSS, and MDX (underlying stack: HTML, CSS, and JavaScript)
-- *Accessibility:* Colour Contrast Analyzer and axe DevTools to ensure WCAG 2.1 compliance
-- *Collaboration & Version Control:* Git and GitHub for version control, code management, and tracking
+- **Figma** – lo-fi & hi-fi mocks + interactive prototype  
+- **Next.js + TypeScript + Tailwind + MDX** – content-driven, accessibility-focused build  
+- **axe DevTools, Colour Contrast Analyser** – verify WCAG contrast and semantics  
+- **Git + GitHub** – version control and deploy
 
 <Subhead>Success Metrics</Subhead>
-- Increase in interview invitations
-- Recruiters and peers requesting to view my portfolio
+- Increase in interview invitations  
+- Recruiters and peers requesting to view my portfolio  
 - Growth in portfolio website visits
 
 <Subhead>Constraints</Subhead>
-The portfolio needed to be completed within a short timeframe to meet application deadlines and be ready for recruiter review.
+The portfolio needed to be completed quickly to meet application deadlines and be ready for recruiter review.
 
 <Subhead>Timeline (2 Weeks)</Subhead>
-- Wireframing: Lo-fi exploration sketches (1 day) and hi-fi refinement in Figma (1 day)
-- Prototyping: Interactive build and component development (5 days)
-- Testing & Iteration: Usability testing, accessibility validation, and refinements (4 days)
-- Launch: Final deployment and review (1 day)
+- Wireframing: lo-fi exploration (1 day) → hi-fi refinement in Figma (1 day)  
+- Prototyping: interactive build and component development (5 days)  
+- Testing & iteration: usability testing, accessibility validation, refinements (4 days)  
+- Launch: final deployment and review (1 day)
 
 ## Research & Planning
 <Subhead>Target Audience</Subhead>
 IT professionals and peers, with an emphasis on accessibility and inclusivity.
 
-<Subhead>Accessibility Considerations</Subhead>
-Compliance with WCAG guidelines was a central priority. Color contrast, font size, and keyboard navigation were tested and refined to meet accessibility standards.
+<Subhead>Accessibility & AODA</Subhead>
+This site is designed to conform to **WCAG 2.0 Level AA (AODA)** and additionally checked against key **WCAG 2.1/2.2** criteria (keyboard operation, focus visibility, reduced motion). I verified contrast with **Colour Contrast Analyser** and audited pages with **axe DevTools**; all interactive paths support keyboard use and include a **Skip to content** link.
 
 <Subhead>Comparative Analysis</Subhead>
-After reviewing over ten portfolios on Behance and UXfolio, I observed that many functioned as extended resumes and included unfinished or planned projects. I adopted the resume-like structure but chose to showcase only completed, polished work to maintain professionalism.
+I reviewed 10+ portfolios on Behance and UXfolio, and also studied sites from several of my favourite **indie game developers** (solo and small teams) to stay current on interaction patterns and publishing workflows. Key takeaways:
+
+- **Clarity over volume:** the strongest portfolios lead with 2–4 polished projects vs. long “work dumps.”
+- **Case-study depth:** clear problem → approach → outcome structure with scannable subheads works best.
+- **Live artifacts matter:** playable demos / code links / prototypes build trust faster than screenshots alone.
+- **Performance & motion:** lightweight media and restrained animations with `prefers-reduced-motion` support.
+- **Tech signal:** concise “built with” sections (framework + tools) help recruiters and peers qualify quickly.
+
+**What I adopted:** featured-first layout, live demo links, concise tool list, and a structured case-study template.  
+**What I avoided:** heavy hero videos, autoplay media, and overly experimental navigation that hurts accessibility.
 
 <Subhead>User Personas</Subhead>
-- Hiring Manager: Needs quick navigation to the resume and a clear overview of skills
-- IT Peer/Collaborator: Interested in project details and experience for potential collaboration
+- **Hiring Manager:** Needs quick access to the résumé and a clear overview of skills  
+- **IT Peer / Collaborator:** Interested in project details and experience for potential collaboration
 
 <Subhead>Storyboarding</Subhead>
-To validate user flows, I created storyboards for two primary personas. These scenarios captured each user’s goals, actions, and emotions, helping me confirm that the portfolio supported both hiring and collaboration needs.
+I storyboarded two primary journeys to confirm that navigation supported both hiring and collaboration needs.
 
-- *Recruiter Journey:* A recruiter lands on the homepage, immediately spots the resume link, opens it within seconds, and optionally reviews projects for additional context. This validated that navigation provided rapid access to essential information.
- [Insert 4-frame storyboard image + captions]
+- *Recruiter journey:* Lands on home → finds résumé in under 2 seconds → optionally reviews projects for context.  
 
-- *Peer/Collaborator Journey:* A peer navigates to “See All Projects,” browses categories, opens a case study, and explores a live demo. This confirmed that project documentation and live links were both accessible and compelling.
- [Insert 4-frame storyboard image + captions]
+
+- *Peer/collaborator journey:* “See All Projects” → filter → open a case study → try demo.  
+
 
 ## Wireframing & Prototyping
-After validating user flows through storyboards, I translated these journeys into wireframes to establish page structure and navigation. The goal was to confirm functionality and flow before refining visual design.
+After validating flows, I translated them into wireframes to lock structure and navigation before visual polish.
 
 <Subhead>Components</Subhead>
-Even in a small portfolio site, several recurring elements were designed for consistency, including the navigation bar, project cards, buttons, and footer. Each was refined to meet accessibility standards, with sufficient contrast, large click/tap areas, and clear keyboard focus states.
+I standardized the navigation bar, project cards, buttons, and footer. Each meets accessibility expectations: sufficient contrast, large click/tap areas, visible focus, and non-color cues on hover.
 
 <Subhead>Design Decisions</Subhead>
-Throughout the prototyping process, I made deliberate choices to balance aesthetics with accessibility. While I initially leaned toward pastel palettes and experimental layouts, accessibility testing revealed contrast and readability issues. I selected a minimalist, high-contrast palette and increased font sizes to ensure legibility.
-I also prioritized clarity in navigation. For example, user testing revealed that the resume link was overlooked in the footer, so I moved it into the main navigation bar. This adjustment improved discoverability significantly.
-These design decisions, though modest in scope, had a high impact on usability, ensuring the portfolio remained clean, professional, and accessible. [Insert before/after screenshots]
+- **Palette:** Switched from pastel to high-contrast after contrast failures; ensures **AA** for default, hover, focus, and disabled states.  
+- **Nav clarity:** Résumé link moved from footer → navbar after **3/5** testers missed it; now **5/5** find it in < 2s.  
+- **Components:** Button variants with visible focus rings, hover underline, and thicker borders to signal interactivity.
 
 ## User Testing & Feedback
+<Subhead>Participants & Tasks</Subhead>
+- **5 testers** (2 hiring-adjacent, 3 peers)  
+- Tasks: open résumé; find one featured project; navigate to demo; keyboard-only pass
 
+<Subhead>Findings</Subhead>
+- Résumé link in footer **missed by 3/5** → moved to navbar → **5/5** success  
+- Button hover contrast too subtle → added **border-2** + underline on hover  
+- Case study TOC sticky state jitter → added offset-aware smooth scroll and stable active-section detection
 
+<Subhead>Changes Shipped</Subhead>
+Promoted résumé to main nav; improved button hover/focus; stabilized TOC behavior.
 
+<Subhead>Results</Subhead>
+- Keyboard-only task completion: **100%**  
+- Contrast checks pass (text and interactive states)
 
 ## Final Design & Launch
 <Subhead>Outcome</Subhead>
-The finished product is a polished, responsive, and accessible portfolio website that effectively represents my skills and professional identity. [Insert screenshots of desktop and mobile versions, alongside earlier iterations]
+A polished, responsive, accessibility-first portfolio that effectively represents my skills and professional identity.  
+[Insert screenshots of desktop and mobile versions, alongside earlier iterations]
 
 <Subhead>Reflection</Subhead>
-Accessibility was the strongest success of this project. Tools such as Colour Contrast Analyzer and axe DevTools proved invaluable in identifying issues that were not always obvious. The main challenge was balancing aesthetics with accessibility. While I prefer pastel palettes and experimental layouts, these often conflicted with WCAG guidelines. I chose to prioritize inclusivity and usability over stylistic experimentation. In the future, I plan to develop a secondary, experimental portfolio to explore creative and unconventional designs, while maintaining this primary site as a professional, accessibility-first showcase.
+Accessibility was the strongest success. **Colour Contrast Analyser** and **axe DevTools** surfaced issues that weren’t always obvious. The main challenge was balancing aesthetics with accessibility—pastel palettes and experimental layouts often conflicted with WCAG, so I prioritized inclusivity and usability. I plan to build a secondary, experimental portfolio to explore unconventional designs while keeping this primary site professional and AA-focused.
 
 ## Images
 <ImageGrid
   images={[
-    { src: "/images/portfolio/portfolioImg1.png",  alt: "Skip to content link button shown for accessibility", caption: "Skip to content link button shown for accessibility, not visible with styling" },
+    { src: "/images/portfolio/portfolioImg1.png", alt: "Skip to content link visible on focus, hidden by default", caption: "Skip link appears for keyboard users" },
   ]}
-  />
+/>

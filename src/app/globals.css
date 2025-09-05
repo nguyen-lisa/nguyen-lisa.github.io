@@ -20,8 +20,11 @@
 
 /* -------------------- Base -------------------- */
 html,body{ background:var(--background); color:var(--foreground); }
-html{ scroll-behavior:smooth; }
-@media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
 
 /* Prose defaults on dark */
 .prose{
@@ -45,9 +48,20 @@ html{ scroll-behavior:smooth; }
   .prose h3{ @apply mt-8 mb-2 text-xl md:text-2xl font-semibold; }
 }
 
+@layer utilities {
+  .cv-auto { content-visibility: auto; contain-intrinsic-size: 0 800px; }
+}
+
 /* -------------------- Components -------------------- */
 @layer components{
   /* Buttons */
+  .chip { @apply border border-border text-text bg-transparent; }
+  .chip:hover,
+  .chip:focus-visible { 
+    @apply border-2 border-accent text-accent;
+    background: transparent;    /* key: don't fill */
+  }
+  .chip-active { @apply border-2 border-accent text-accent; }
   .btn{
     @apply inline-flex items-center justify-center gap-2 rounded-lg
            px-3 py-1.5 text-sm font-medium

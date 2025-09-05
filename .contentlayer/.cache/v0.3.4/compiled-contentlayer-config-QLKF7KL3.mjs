@@ -1,20 +1,15 @@
 // contentlayer.config.ts
-// @ts-nocheck
-
 import { defineDocumentType, defineNestedType, makeSource } from "contentlayer/source-files";
-// import remarkGfm from "remark-gfm";            // ⬅️ remove GFM to avoid mdast table crash
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-
-const Demo = defineNestedType(() => ({
+var Demo = defineNestedType(() => ({
   name: "Demo",
   fields: {
     label: { type: "string", required: false },
-    url:   { type: "string", required: true },
-  },
+    url: { type: "string", required: true }
+  }
 }));
-
-export const Project = defineDocumentType(() => ({
+var Project = defineDocumentType(() => ({
   name: "Project",
   filePathPattern: `projects/**/*.mdx`,
   contentType: "mdx",
@@ -28,29 +23,33 @@ export const Project = defineDocumentType(() => ({
     thumbnail: { type: "string" },
     ogImage: { type: "string" },
     demo: { type: "nested", of: Demo },
-    repo: { type: "string" },
+    repo: { type: "string" }
   },
   computedFields: {
     slug: {
       type: "string",
-      resolve: (doc) => doc._raw.flattenedPath.replace(/^projects\//, ""),
+      resolve: (doc) => doc._raw.flattenedPath.replace(/^projects\//, "")
     },
     url: {
       type: "string",
-      resolve: (doc) => `/project/${doc._raw.flattenedPath.replace(/^projects\//, "")}`,
-    },
-  },
+      resolve: (doc) => `/project/${doc._raw.flattenedPath.replace(/^projects\//, "")}`
+    }
+  }
 }));
-
-export default makeSource({
+var contentlayer_config_default = makeSource({
   contentDirPath: "src/content",
   documentTypes: [Project],
   mdx: {
     // remarkPlugins: [remarkGfm],             // ⬅️ remove
     rehypePlugins: [
-      rehypeSlug as any,
-      [rehypeAutolinkHeadings as any, { behavior: "wrap" }],
-    ] as any[],
-  },
+      rehypeSlug,
+      [rehypeAutolinkHeadings, { behavior: "wrap" }]
+    ]
+  }
   // disableImportAliasWarning: true,
 });
+export {
+  Project,
+  contentlayer_config_default as default
+};
+//# sourceMappingURL=compiled-contentlayer-config-QLKF7KL3.mjs.map

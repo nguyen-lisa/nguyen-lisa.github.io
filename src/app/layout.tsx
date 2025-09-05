@@ -10,14 +10,16 @@ export const metadata: Metadata = {
   description: "Accessibility-first · UI/UX · Front-end",
   metadataBase: new URL("https://your-domain.example"), // replace later
   openGraph: {
-    title: "Lisa Nguyen - Portfolio",
-    description: "Accessibility-first · UI/UX · Front-end",
-    url: "https://your-domain.example",
-    siteName: "Lisa Nguyen",
-    images: ["/og/home.png"], // optional; add when ready
-  },
+  title: "Lisa Nguyen - Portfolio",
+  description: "Accessibility-first · UI/UX · Front-end",
+  url: "https://your-domain.example",
+  siteName: "Lisa Nguyen",
+  images: ["/og/home.png"], // optional; add when ready
+  metadataBase: new URL("https://nguyen-lisa.github.io/my-portfolio"),
+  openGraph: { /* images etc. */ },
   twitter: { card: "summary_large_image" },
-};
+  };
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

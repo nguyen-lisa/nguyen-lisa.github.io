@@ -1,81 +1,88 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-type ImgItem = {
-  src: string;
-  alt: string;
-  caption?: string;
-};
+type ImgItem = { src: string; alt: string; caption?: string };
 
 export default function ImageGrid({ images }: { images: ImgItem[] }) {
   const [open, setOpen] = useState(false);
   const [idx, setIdx] = useState(0);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
-  const prevFocusRef = useRef<Element | null>(null);
+  const prevFocusRef = useRef<HTMLElement | null>(null);
 
   const openAt = (i: number) => {
-    prevFocusRef.current = document.activeElement ?? null;
+    prevFocusRef.current = document.activeElement as HTMLElement | null;
     setIdx(i);
     setOpen(true);
   };
 
-  const close = () => {
+  // Make handlers stable
+  const close = useCallback(() => {
     setOpen(false);
-    if (prevFocusRef.current instanceof HTMLElement) prevFocusRef.current.focus();
-  };
+    prevFocusRef.current?.focus();
+  }, []);
 
-  const prev = () => setIdx((i) => (i - 1 + images.length) % images.length);
-  const next = () => setIdx((i) => (i + 1) % images.length);
+  const prev = useCallback(() => {
+    setIdx((i) => (i - 1 + images.length) % images.length);
+  }, [images.length]);
+
+  const next = useCallback(() => {
+    setIdx((i) => (i + 1) % images.length);
+  }, [images.length]);
 
   useEffect(() => {
     if (!open) return;
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
       if (e.key === "ArrowLeft") prev();
       if (e.key === "ArrowRight") next();
     };
+
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
     closeBtnRef.current?.focus();
+
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = originalOverflow;
     };
-  }, [open]);
+  }, [open, close, prev, next]);
+
+  if (!images?.length) return null;
 
   return (
     <>
-      {/* Grid of thumbnails */}
-      <div
-        className="not-prose grid grid-cols-2 md:grid-cols-3 gap-3"
-        role="list"
-        aria-label="Image gallery"
-      >
+      {/* Thumbnail grid (real list semantics) */}
+      <ul className="not-prose grid grid-cols-2 md:grid-cols-3 gap-3 list-none p-0 m-0">
         {images.map((img, i) => (
-          <button
-            key={i}
-            role="listitem"
-            className="group relative aspect-[4/3] overflow-hidden rounded-lg border border-border focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            onClick={() => openAt(i)}
-            aria-label={`Open image ${i + 1}: ${img.alt}`}
-          >
-            <img
-              src={img.src}
-              alt={img.alt}
-              className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.03]"
-              loading="lazy"
-              decoding="async"
-            />
-            {img.caption && (
-              <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs px-2 py-1">
-                {img.caption}
+          <li key={i}>
+            <button
+              type="button"
+              aria-label={`Open image ${i + 1}: ${img.alt}`}
+              onClick={() => openAt(i)}
+              className="group relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-border focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <div className="absolute inset-0">
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-200 group-hover:scale-[1.03]"
+                />
               </div>
-            )}
-          </button>
+              {img.caption && (
+                <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs px-2 py-1">
+                  {img.caption}
+                </div>
+              )}
+            </button>
+          </li>
         ))}
-      </div>
+      </ul>
 
       {/* Lightbox */}
       {open && (
@@ -83,25 +90,23 @@ export default function ImageGrid({ images }: { images: ImgItem[] }) {
           role="dialog"
           aria-modal="true"
           aria-label="Image preview"
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur flex items-center justify-center p-4"
-          onMouseDown={(e) => {
-            if (e.target === e.currentTarget) close(); // click outside to close
-          }}
+          className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur flex items-center justify-center p-4"
         >
-          <figure
-            className="relative"
-            style={{ maxWidth: "min(90vw, 1100px)" }} // cap width
-          >
+          {/* Backdrop button (click outside to close) */}
+          <button
+            type="button"
+            aria-hidden="true"
+            tabIndex={-1}
+            onClick={close}
+            className="absolute inset-0 cursor-default"
+          />
+
+          <figure className="relative" style={{ maxWidth: "min(90vw, 1100px)" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={images[idx].src}
               alt={images[idx].alt}
-              style={{
-                maxHeight: "80vh",
-                maxWidth: "100%",
-                width: "100%",
-                height: "auto",
-                objectFit: "contain",
-              }}
+              style={{ maxHeight: "80vh", maxWidth: "100%", width: "100%", height: "auto", objectFit: "contain" }}
               className="rounded-xl border border-border bg-base"
             />
 
@@ -124,7 +129,6 @@ export default function ImageGrid({ images }: { images: ImgItem[] }) {
               </button>
             </div>
 
-            {/* Left hotzone (clicks only on the button) */}
             <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
               <button
                 type="button"
@@ -136,7 +140,6 @@ export default function ImageGrid({ images }: { images: ImgItem[] }) {
               </button>
             </div>
 
-            {/* Right hotzone (clicks only on the button) */}
             <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
               <button
                 type="button"

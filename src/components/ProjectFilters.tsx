@@ -17,7 +17,7 @@ export default function ProjectFilters({ projects }: { projects: Project[] }) {
   const [cat, setCat] = useState<string | null>(null);
   // const [tool, setTool] = useState<string>(""); // ← disabled for now
 
-  const featured = projects.filter((p) => p.featured);
+  //const featured = projects.filter((p) => p.featured);
 
   const categories = useMemo(() => {
     const cats = projects.flatMap((p) => p.categories ?? []);
@@ -36,7 +36,7 @@ export default function ProjectFilters({ projects }: { projects: Project[] }) {
   const filtered = base;
 
   const tabClass = (active: boolean) =>
-    `btn btn-outline px-3 py-1.5 ${active ? "border-2 border-accent text-accent" : ""}`;
+  `btn chip px-3 py-1.5 ${active ? "chip-active" : ""}`;
 
   return (
     <div className="space-y-4">
