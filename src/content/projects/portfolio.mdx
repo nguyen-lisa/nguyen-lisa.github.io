@@ -29,20 +29,67 @@ Designer, Programmer, Prototyper
 - *Accessibility:* Colour Contrast Analyzer and axe DevTools to ensure WCAG 2.1 compliance
 - *Collaboration & Version Control:* Git and GitHub for version control, code management, and tracking
 
-## Research
-Notes about users.
+<Subhead>Success Metrics</Subhead>
+- Increase in interview invitations
+- Recruiters and peers requesting to view my portfolio
+- Growth in portfolio website visits
 
-### Surveys
-What you learned.
+<Subhead>Constraints</Subhead>
+The portfolio needed to be completed within a short timeframe to meet application deadlines and be ready for recruiter review.
 
-## Design
-Wireframes, states, a11y choices.
+<Subhead>Timeline (2 Weeks)</Subhead>
+- Wireframing: Lo-fi exploration sketches (1 day) and hi-fi refinement in Figma (1 day)
+- Prototyping: Interactive build and component development (5 days)
+- Testing & Iteration: Usability testing, accessibility validation, and refinements (4 days)
+- Launch: Final deployment and review (1 day)
 
-## Implementation
-Stack, components, performance.
+## Research & Planning
+<Subhead>Target Audience</Subhead>
+IT professionals and peers, with an emphasis on accessibility and inclusivity.
 
-## Outcome
-Results and next steps.
+<Subhead>Accessibility Considerations</Subhead>
+Compliance with WCAG guidelines was a central priority. Color contrast, font size, and keyboard navigation were tested and refined to meet accessibility standards.
+
+<Subhead>Comparative Analysis</Subhead>
+After reviewing over ten portfolios on Behance and UXfolio, I observed that many functioned as extended resumes and included unfinished or planned projects. I adopted the resume-like structure but chose to showcase only completed, polished work to maintain professionalism.
+
+<Subhead>User Personas</Subhead>
+- Hiring Manager: Needs quick navigation to the resume and a clear overview of skills
+- IT Peer/Collaborator: Interested in project details and experience for potential collaboration
+
+<Subhead>Storyboarding</Subhead>
+To validate user flows, I created storyboards for two primary personas. These scenarios captured each user’s goals, actions, and emotions, helping me confirm that the portfolio supported both hiring and collaboration needs.
+
+- *Recruiter Journey:* A recruiter lands on the homepage, immediately spots the resume link, opens it within seconds, and optionally reviews projects for additional context. This validated that navigation provided rapid access to essential information.
+ [Insert 4-frame storyboard image + captions]
+
+- *Peer/Collaborator Journey:* A peer navigates to “See All Projects,” browses categories, opens a case study, and explores a live demo. This confirmed that project documentation and live links were both accessible and compelling.
+ [Insert 4-frame storyboard image + captions]
+
+## Wireframing & Prototyping
+After validating user flows through storyboards, I translated these journeys into wireframes to establish page structure and navigation. The goal was to confirm functionality and flow before refining visual design.
+
+<Subhead>Components</Subhead>
+Even in a small portfolio site, several recurring elements were designed for consistency, including the navigation bar, project cards, buttons, and footer. Each was refined to meet accessibility standards, with sufficient contrast, large click/tap areas, and clear keyboard focus states.
+
+<Subhead>Design Decisions</Subhead>
+Throughout the prototyping process, I made deliberate choices to balance aesthetics with accessibility. While I initially leaned toward pastel palettes and experimental layouts, accessibility testing revealed contrast and readability issues. I selected a minimalist, high-contrast palette and increased font sizes to ensure legibility.
+I also prioritized clarity in navigation. For example, user testing revealed that the resume link was overlooked in the footer, so I moved it into the main navigation bar. This adjustment improved discoverability significantly.
+These design decisions, though modest in scope, had a high impact on usability, ensuring the portfolio remained clean, professional, and accessible. [Insert before/after screenshots]
+
+## User Testing & Feedback
+
+
+
+
+## Final Design & Launch
+<Subhead>Outcome</Subhead>
+The finished product is a polished, responsive, and accessible portfolio website that effectively represents my skills and professional identity. [Insert screenshots of desktop and mobile versions, alongside earlier iterations]
+
+<Subhead>Reflection</Subhead>
+Accessibility was the strongest success of this project. Tools such as Colour Contrast Analyzer and axe DevTools proved invaluable in identifying issues that were not always obvious. The main challenge was balancing aesthetics with accessibility. While I prefer pastel palettes and experimental layouts, these often conflicted with WCAG guidelines. I chose to prioritize inclusivity and usability over stylistic experimentation. In the future, I plan to develop a secondary, experimental portfolio to explore creative and unconventional designs, while maintaining this primary site as a professional, accessibility-first showcase.
+
+## Images
 <ImageGrid
   images={[
     { src: "/images/portfolio/portfolioImg1.png",  alt: "Skip to content link button shown for accessibility", caption: "Skip to content link button shown for accessibility, not visible with styling" },

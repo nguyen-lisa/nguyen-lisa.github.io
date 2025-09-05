@@ -87,7 +87,41 @@ html{ scroll-behavior:smooth; }
   .img-grid figcaption{ @apply text-xs text-text/70 mt-1; }
 
    /* MDX subhead spacing */
-  .prose .subhead { display: block; margin-bottom: 0.25rem; }
-  .prose h2 + .subhead { margin-top: -0.4rem; }
-  .prose h3 + .subhead { margin-top: -0.35rem; }
+  .prose .subhead {
+    display: block;
+    color: color-mix(in oklab, var(--color-text), transparent 30%);
+    margin-top: 0.35rem;   /* default top gap */
+    margin-bottom: 0.25rem;
+  }
+
+  /* If MDX wrapped it in a <p>, normalize that paragraph's margins */
+  .prose p:has(> .subhead) {
+    margin-top: 0.35rem;
+    margin-bottom: 0.25rem;
+  }
+
+  /* Pull Subhead closer when it follows a heading */
+  .prose h2 + .subhead,
+  .prose h2 + p:has(> .subhead) { margin-top: -0.25rem; }
+
+  .prose h3 + .subhead,
+  .prose h3 + p:has(> .subhead) { margin-top: -0.2rem; }
+
+  /* Ensure a little space when Subhead follows body elements */
+  .prose p + .subhead,
+  .prose p + p:has(> .subhead),
+  .prose ul + .subhead,
+  .prose ol + .subhead,
+  .prose pre + .subhead,
+  .prose blockquote + .subhead {
+    margin-top: 0.4rem;
+  }
+
+  /* Keep lists tight after a Subhead */
+  .prose .subhead + ul,
+  .prose .subhead + ol,
+  .prose p:has(> .subhead) + ul,
+  .prose p:has(> .subhead) + ol {
+    margin-top: 0.15rem;
+  }
 }
