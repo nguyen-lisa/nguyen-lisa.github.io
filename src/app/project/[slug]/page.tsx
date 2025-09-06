@@ -5,7 +5,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import GithubSlugger from "github-slugger";
-
+import MdxLink from "@/components/MdxLink";
 import Image from "next/image";
 import CaseToc, { TocItem } from "@/components/CaseToc";
 import ImageGrid from "@/components/ImageGrid";
@@ -141,10 +141,9 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
 
           <MDXRemote
             source={project.body.raw}
-            components={{ Subhead, ImageGrid }}
+            components={{ a: MdxLink, Subhead, ImageGrid }}
             options={{
               mdxOptions: {
-                // remarkPlugins: [remarkGfm], // ⬅️ removed
                 rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: "wrap" }]],
               },
             }}

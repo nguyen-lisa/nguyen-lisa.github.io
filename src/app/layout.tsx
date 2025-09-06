@@ -5,21 +5,30 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SkipLink from "@/components/SkipLink";
 
+const BP = process.env.NEXT_PUBLIC_BASE_PATH ?? ""; // "" locally, "/my-portfolio" in CI
+
 export const metadata: Metadata = {
   title: "Lisa Nguyen - Portfolio",
   description: "Accessibility-first · UI/UX · Front-end",
-  metadataBase: new URL("https://your-domain.example"), // replace later
+  // Must be origin-only:
+  metadataBase: new URL("https://nguyen-lisa.github.io"),
+
+  alternates: {
+    canonical: `${BP}/`, // ensures canonical has the basePath on GH Pages
+  },
   openGraph: {
-  title: "Lisa Nguyen - Portfolio",
-  description: "Accessibility-first · UI/UX · Front-end",
-  url: "https://your-domain.example",
-  siteName: "Lisa Nguyen",
-  images: ["/og/home.png"], // optional; add when ready
-  metadataBase: new URL("https://nguyen-lisa.github.io/my-portfolio"),
-  openGraph: { /* images etc. */ },
-  twitter: { card: "summary_large_image" },
-  };
-}
+    title: "Lisa Nguyen - Portfolio",
+    description: "Accessibility-first · UI/UX · Front-end",
+    url: `${BP}/`,
+    siteName: "Lisa Nguyen",
+    images: [`${BP}/og/home.png`], // prefix assets with basePath
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [`${BP}/og/home.png`],
+  },
+};
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
