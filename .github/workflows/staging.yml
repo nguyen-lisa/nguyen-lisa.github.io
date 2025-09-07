@@ -1,9 +1,9 @@
-name: Staging Deployment
+name: Deploy to GitHub Pages
 
 on:
     push:
         branches:
-            - staging
+            - main
 
 jobs:
     build:
@@ -16,15 +16,18 @@ jobs:
                 node-version: '18'
             - name: Install dependencies
               run: npm ci
+            - name: Run tests
+              run: npm test
             - name: Build
               run: npm run build
 
     deploy:
         needs: build
         runs-on: ubuntu-latest
-        if: success() # Only runs if build job succeeded
         steps:
             - uses: actions/checkout@v3
-            # Add your deployment steps here
-            - name: Deploy to Staging
-              run: echo "Deploying to staging environment..."
+            - name: Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                github_token: ${{ secrets.GITHUB_TOKEN }}
+                publish_dir: ./build
