@@ -37,9 +37,9 @@ export default function Navbar() {
           {/* Match height; outline style so it doesn’t overpower Home */}
           <a
             href="/LisaNguyenResume.pdf"
+            className="btn btn-white"
             target="_blank"
             rel="noreferrer"
-            className="btn btn-outline h-9 px-3 text-sm"
           >
             View Résumé
           </a>

@@ -25,9 +25,9 @@ export default function Hero() {
         {/* Open résumé in a new tab to avoid losing context */}
         <a
           href="/LisaNguyenResume.pdf"
+          className="btn btn-white"
           target="_blank"
           rel="noreferrer"
-          className="btn btn-white"
         >
           View Résumé
         </a>
