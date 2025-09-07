@@ -44,3 +44,4 @@ export default function ProjectCard({ project }: { project: Project }) {
     </article>
   );
 }
+]
