@@ -24,7 +24,7 @@ export default function Hero() {
       <div className="mt-6 flex items-center justify-center gap-3 not-prose">
         {/* Open résumé in a new tab to avoid losing context */}
         <a
-          href="/resume.pdf"
+          href="/LisaNguyenResume.pdf"
           target="_blank"
           rel="noreferrer"
           className="btn btn-white"
