@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section className="text-center py-12 sm:py-16">
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
-        Hi, I’m Lisa.
+        Hi, I’m Lisa Nguyen.
       </h1>
 
       <p className="mt-2 text-text/80">
