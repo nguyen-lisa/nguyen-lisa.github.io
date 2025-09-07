@@ -113,7 +113,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                 </a>
               )}
               {project.demo?.url && (
-                <a className="btn btn-accent" target="_blank" rel="noreferrer" href={project.demo.url}>
+                <a className="btn btn-outline" target="_blank" rel="noreferrer" href={project.demo.url}>
                   {project.demo.label ?? "Live Demo"}
                 </a>
               )}

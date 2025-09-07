@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Build & Deploy (Pages)
 
 on:
   push:
@@ -19,20 +19,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-      - run: npm ci
-      - run: npm run content || echo "contentlayer warning"
+
+      - run: npm ci --no-audit --no-fund
+
+      # Build typed content — if this fails, the job fails (no deploy)
+      - run: npm run content
+
+      # Next.js: build + export (fails = stop)
       - run: npm run build
-      - run: touch out/.nojekyll    # ← important for GH Pages (_next/ allowed)
+
+      # Sanity checks: fail if export didn’t produce expected files
+      - name: Verify static export
+        run: |
+          test -f out/index.html
+          test -d out/_next
+
+      # Only reached if all above steps succeeded
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
 
   deploy:
     needs: build
+    if: ${{ success() }}          # deploy only if build job succeeded
     runs-on: ubuntu-latest
     environment:
       name: github-pages
