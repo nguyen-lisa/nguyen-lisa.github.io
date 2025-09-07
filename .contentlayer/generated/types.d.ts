@@ -70,7 +70,7 @@ export interface ContentlayerGenTypes {
 }
 
 declare global {
-  interface ContentlayerGen extends ContentlayerGenTypes {}
+  //interface ContentlayerGen extends ContentlayerGenTypes {}
 }
 
 export type DocumentTypeMap = {

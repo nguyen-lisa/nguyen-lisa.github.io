@@ -116,6 +116,16 @@ I storyboarded two primary journeys to confirm that navigation supported both hi
 
 - *Peer/collaborator journey:* “See All Projects” → filter → open a case study → try demo.  
 
+### CI/CD & Hosting
+
+- **Platform:** GitHub Pages  
+- **Pipeline:** GitHub Actions (build → export → deploy)  
+- **Trigger:** On every push to `main` (plus manual “Run workflow”)  
+- **Build steps:** `npm ci` → `contentlayer build` → `next build && next export`  
+- **Publish:** Uploads static site from `out/` to Pages  
+- **Routing:** `basePath` / `assetPrefix` configured for GitHub Pages  
+- **Images:** `next/image` in unoptimized mode for static hosting  
+- **Quality gates:** ESLint (`jsx-a11y`), Lighthouse/axe spot checks before shipping
 
 ## Wireframing & Prototyping
 After validating flows, I translated them into wireframes to lock structure and navigation before visual polish.
