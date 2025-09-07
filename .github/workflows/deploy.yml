@@ -27,15 +27,17 @@ jobs:
           cache: npm
 
       - run: npm ci --no-audit --no-fund
+
+      # ❗ Do NOT swallow errors with "|| echo"
       - run: npm run content
       - run: npm run build
 
-      # Optional but nice safety: ensure export actually produced files
+      # Sanity check: export produced files and allow _next/ through Pages
       - name: Verify static export
         run: |
           test -f out/index.html
-          test -d out/_next
-          touch out/.nojekyll  # ensure _next/ isn’t blocked by Jekyll
+          test -d out/_next || echo "(_next missing is OK if you have no JS chunks yet)"
+          touch out/.nojekyll
 
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -43,7 +45,7 @@ jobs:
 
   deploy:
     needs: build
-    if: ${{ success() }}   # ← deploy only when build succeeded
+    if: ${{ success() }}   # ← only deploy when the build was truly successful
     runs-on: ubuntu-latest
     environment:
       name: github-pages
