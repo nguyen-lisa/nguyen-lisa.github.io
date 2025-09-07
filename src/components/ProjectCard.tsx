@@ -34,6 +34,12 @@ export default function ProjectCard({ project }: { project: Project }) {
             {project.demo.label ?? "Demo"}
           </a>
         )}
+        {project.repo && (
+          <a className="btn btn-outline" target="_blank" rel="noreferrer" href={project.repo}>
+            Source
+          </a>
+        )}
+
       </div>
     </article>
   );

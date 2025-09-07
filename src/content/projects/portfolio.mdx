@@ -8,6 +8,7 @@ featured: true
 demo:
   label: "Lofi Prototype"
   url: "https://www.figma.com/proto/ev3JHCYyJgBYDc1gCM5ARH/Portfolio?node-id=0-1&t=DGX0Ilqi9XBD2rzU-1"
+repo: "https://github.com/nguyen-lisa/my-portfolio"
 ---
 
 ## Executive Summary
@@ -15,13 +16,14 @@ demo:
 - Clear paths to **Resume**, **Featured projects**, and **Case studies** with demos.
 - High-contrast theme, visible focus rings, keyboard navigation, alt text throughout.
 
-> **Tech highlights**
-> - Next.js App Router, static export for GitHub Pages (basePath/assetPrefix tuned)
-> - MDX + Contentlayer (typed `Project` model, front-matter → routes)
-> - Sticky left TOC (IntersectionObserver, offset-aware smooth scroll)
-> - Accessible lightbox (Esc/←/→, focus trap, restore focus)
-> - Tailwind v4 tokens + component classes (btn variants, high-contrast theme)
-> - ESLint + `jsx-a11y`; Lighthouse/axe audits clean
+### Tech highlights
+- Next.js App Router with **static export** for GitHub Pages (basePath/assetPrefix tuned).
+- **CI/CD**: GitHub Actions builds on push to `main` and publishes the static `out/` artifact to Pages.
+- **MDX + Contentlayer**: typed `Project` model; front-matter drives routes and TOC.
+- Sticky left TOC (IntersectionObserver + offset-aware smooth scroll).
+- Accessible lightbox (Esc / ← / →, focus trap, restores focus on close).
+- Tailwind v4 tokens + component classes (high-contrast theme, button variants).
+- Quality gates: **eslint-plugin-jsx-a11y**, **Lighthouse 100**, **axe DevTools** clean.
 
 <Subhead>Project at a glance</Subhead>
 
@@ -29,7 +31,7 @@ demo:
 - **Stack:** Next.js, TypeScript, Tailwind, MDX  
 - **Accessibility:** WCAG 2.0 AA (AODA); skip link, keyboard-friendly TOC, reduced-motion support; audits: Lighthouse 100, axe DevTools (Free) clean, eslint-plugin-jsx-a11y in CI
 - **Timeline:** 2 weeks (see breakdown below)  
-- **Links:** <a href="/LisaNguyenResume.pdf" target="_blank" rel="noreferrer">Resume</a> · [Figma Prototype](https://www.figma.com/proto/ev3JHCYyJgBYDc1gCM5ARH/Portfolio?node-id=0-1&t=DGX0Ilqi9XBD2rzU-1)
+- **Links:** <a href="/LisaNguyenResume.pdf" target="_blank" rel="noreferrer">Resume</a> · [Figma Prototype](https://www.figma.com/proto/ev3JHCYyJgBYDc1gCM5ARH/Portfolio?node-id=0-1&t=DGX0Ilqi9XBD2rzU-1) · [Source (Github)](repo: "https://github.com/nguyen-lisa/my-portfolio")
 
 ## Project Overview
 <Subhead>Problem Statement</Subhead>

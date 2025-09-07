@@ -117,6 +117,11 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                   {project.demo.label ?? "Live Demo"}
                 </a>
               )}
+              {project.repo && (
+                <a className="btn btn-outline" target="_blank" rel="noreferrer" href={project.repo}>
+                  Source (GitHub)
+                </a>
+              )}
             </div>
 
             {project.thumbnail && (
