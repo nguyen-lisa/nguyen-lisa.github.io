@@ -19,9 +19,9 @@ demo:
 
 - **Role:** Designer · Front-end · Prototyper  
 - **Stack:** Next.js, TypeScript, Tailwind, MDX  
-- **Accessibility:** Designed to conform to **WCAG 2.0 Level AA (AODA)**; skip link, keyboard-friendly TOC, reduced-motion support  
+- **Accessibility:** WCAG 2.0 AA (AODA); skip link, keyboard-friendly TOC, reduced-motion support; audits: Lighthouse 100, axe DevTools (Free) clean, eslint-plugin-jsx-a11y in CI
 - **Timeline:** 2 weeks (see breakdown below)  
-- **Links:** [Résumé](/resume.pdf) · [Figma Prototype](https://www.figma.com/proto/ev3JHCYyJgBYDc1gCM5ARH/Portfolio?node-id=0-1&t=DGX0Ilqi9XBD2rzU-1)
+- **Links:** [Résumé](/LisaNguyenResume.pdf) · [Figma Prototype](https://www.figma.com/proto/ev3JHCYyJgBYDc1gCM5ARH/Portfolio?node-id=0-1&t=DGX0Ilqi9XBD2rzU-1)
 
 ## Project Overview
 <Subhead>Problem Statement</Subhead>
@@ -62,6 +62,21 @@ IT professionals and peers, with an emphasis on accessibility and inclusivity.
 - Designed to conform to **WCAG 2.0 Level AA (AODA)**; also checked key **2.1/2.2** criteria (keyboard, focus visibility, reduced motion).
 - Verified with **Lighthouse** (A11y 100, Perf 100), **axe DevTools** (no critical violations), and **eslint-plugin-jsx-a11y** (clean CI).
 - Color contrast validated with **Colour Contrast Analyser**; all interactive controls have visible focus and non-color cues.
+
+<details>
+  <summary><strong>Audit snapshots</strong></summary>
+
+- Lighthouse (Mobile): **Performance 100 / Accessibility 100 / Best Practices 100 / SEO 100**
+- Lighthouse (Desktop): **Performance 100 / Accessibility 100 / Best Practices 100 / SEO 100**
+- axe DevTools (Free) on Home + Case Study: **0 critical** violations (date: 2025-09-07)
+
+  <ImageGrid
+    images={[
+      { src: "/images/portfolio/axeHomeAudit.png",  alt: "Lighthouse Mobile summary. Emulated form factor: mobile.",  caption: "Lighthouse — Mobile (Emulated form factor: mobile) — 2025-09-07" },
+      { src: "/images/portfolio/axeCaseAudit.png", alt: "Lighthouse Desktop summary. Emulated form factor: desktop.", caption: "Lighthouse — Desktop (Emulated form factor: desktop) — 2025-09-07" }
+    ]}
+  />
+</details>
 
 <Subhead>Comparative Analysis</Subhead>
 I reviewed 10+ portfolios on Behance and UXfolio, and also studied sites from several of my favourite **indie game developers** (solo and small teams) to stay current on interaction patterns and publishing workflows. Key takeaways:

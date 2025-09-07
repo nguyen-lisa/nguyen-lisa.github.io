@@ -5,7 +5,9 @@ import { allProjects } from "contentlayer/generated";
 import Hero from "@/components/Hero";
 import ProjectFilters from "@/components/ProjectFilters";
 
-export const metadata: Metadata = { title: "Home · Lisa Nguyen" };
+export const metadata: Metadata = { title: "Home · Lisa Nguyen",
+  description: "Front-end & UI/UX portfolio by Lisa Nguyen - featured work, detailed case studies, and résumé.",
+ };
 
 export default function HomePage() {
   const projects: Project[] = [...allProjects].sort(
