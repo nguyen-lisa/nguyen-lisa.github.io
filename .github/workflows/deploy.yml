@@ -1,3 +1,4 @@
+# .github/workflows/deploy.yml
 name: Build & Deploy (Pages)
 
 on:
@@ -26,27 +27,23 @@ jobs:
           cache: npm
 
       - run: npm ci --no-audit --no-fund
-
-      # Build typed content — if this fails, the job fails (no deploy)
       - run: npm run content
-
-      # Next.js: build + export (fails = stop)
       - run: npm run build
 
-      # Sanity checks: fail if export didn’t produce expected files
+      # Optional but nice safety: ensure export actually produced files
       - name: Verify static export
         run: |
           test -f out/index.html
           test -d out/_next
+          touch out/.nojekyll  # ensure _next/ isn’t blocked by Jekyll
 
-      # Only reached if all above steps succeeded
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
 
   deploy:
     needs: build
-    if: ${{ success() }}          # deploy only if build job succeeded
+    if: ${{ success() }}   # ← deploy only when build succeeded
     runs-on: ubuntu-latest
     environment:
       name: github-pages
