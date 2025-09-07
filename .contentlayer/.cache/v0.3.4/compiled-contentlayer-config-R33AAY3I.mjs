@@ -1,18 +1,15 @@
+// contentlayer.config.ts
 import { defineDocumentType, defineNestedType, makeSource } from "contentlayer/source-files";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-
-/** Nested type for the optional demo button */
-const Demo = defineNestedType(() => ({
+var Demo = defineNestedType(() => ({
   name: "Demo",
   fields: {
     label: { type: "string", required: false },
-    url: { type: "string", required: true },
-  },
+    url: { type: "string", required: true }
+  }
 }));
-
-/** Project MDX documents */
-export const Project = defineDocumentType(() => ({
+var Project = defineDocumentType(() => ({
   name: "Project",
   filePathPattern: `projects/**/*.mdx`,
   contentType: "mdx",
@@ -20,32 +17,28 @@ export const Project = defineDocumentType(() => ({
     title: { type: "string", required: true },
     summary: { type: "string", required: true },
     date: { type: "date", required: true },
-
     categories: { type: "list", of: { type: "string" }, required: false },
     tools: { type: "list", of: { type: "string" }, required: false },
-
     featured: { type: "boolean", required: false, default: false },
-
     thumbnail: { type: "string", required: false },
-    thumbnailAlt: { type: "string", required: false }, // used for <Image> alt fallback
+    thumbnailAlt: { type: "string", required: false },
+    // used for <Image> alt fallback
     ogImage: { type: "string", required: false },
-
     demo: { type: "nested", of: Demo, required: false },
-    repo: { type: "string", required: false },
+    repo: { type: "string", required: false }
   },
   computedFields: {
     slug: {
       type: "string",
-      resolve: (doc) => doc._raw.flattenedPath.replace(/^projects\//, ""),
+      resolve: (doc) => doc._raw.flattenedPath.replace(/^projects\//, "")
     },
     url: {
       type: "string",
-      resolve: (doc) => `/project/${doc._raw.flattenedPath.replace(/^projects\//, "")}`,
-    },
-  },
+      resolve: (doc) => `/project/${doc._raw.flattenedPath.replace(/^projects\//, "")}`
+    }
+  }
 }));
-
-export default makeSource({
+var contentlayer_config_default = makeSource({
   // your MDX lives under src/content
   contentDirPath: "src/content",
   documentTypes: [Project],
@@ -54,9 +47,14 @@ export default makeSource({
     // remarkPlugins: [],
     rehypePlugins: [
       rehypeSlug,
-      [rehypeAutolinkHeadings, { behavior: "wrap" }],
-    ],
-  },
+      [rehypeAutolinkHeadings, { behavior: "wrap" }]
+    ]
+  }
   // Optional: silence Windows baseUrl warning
   // disableImportAliasWarning: true,
 });
+export {
+  Project,
+  contentlayer_config_default as default
+};
+//# sourceMappingURL=compiled-contentlayer-config-R33AAY3I.mjs.map

@@ -20,6 +20,7 @@ export type Project = {
   tools?: string[] | undefined
   featured: boolean
   thumbnail?: string | undefined
+  thumbnailAlt?: string | undefined
   ogImage?: string | undefined
   demo?: Demo | undefined
   repo?: string | undefined
