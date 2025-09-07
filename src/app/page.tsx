@@ -6,7 +6,7 @@ import Hero from "@/components/Hero";
 import ProjectFilters from "@/components/ProjectFilters";
 
 export const metadata: Metadata = { title: "Home · Lisa Nguyen",
-  description: "Front-end & UI/UX portfolio by Lisa Nguyen - featured work, detailed case studies, and résumé.",
+  description: "Front-end & UI/UX portfolio by Lisa Nguyen - featured work, detailed case studies, and resume.",
  };
 
 export default function HomePage() {

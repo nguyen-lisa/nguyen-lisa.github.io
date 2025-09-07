@@ -41,7 +41,7 @@ export default function Navbar() {
             target="_blank"
             rel="noreferrer"
           >
-            View Résumé
+            View Resume
           </a>
         </nav>
       </div>

@@ -22,14 +22,14 @@ export default function Hero() {
       </p>
 
       <div className="mt-6 flex items-center justify-center gap-3 not-prose">
-        {/* Open résumé in a new tab to avoid losing context */}
+        {/* Open resume in a new tab to avoid losing context */}
         <a
           href="/LisaNguyenResume.pdf"
           className="btn btn-white"
           target="_blank"
           rel="noreferrer"
         >
-          View Résumé
+          View Resume
         </a>
 
         {/* Mailto with a prefilled subject */}

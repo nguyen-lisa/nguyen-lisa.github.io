@@ -12,8 +12,16 @@ demo:
 
 ## Executive Summary
 - Built an accessibility-first portfolio to centralize work and speed recruiter review.
-- Clear paths to **Résumé**, **Featured projects**, and **Case studies** with demos.
+- Clear paths to **Resume**, **Featured projects**, and **Case studies** with demos.
 - High-contrast theme, visible focus rings, keyboard navigation, alt text throughout.
+
+> **Tech highlights**
+> - Next.js App Router, static export for GitHub Pages (basePath/assetPrefix tuned)
+> - MDX + Contentlayer (typed `Project` model, front-matter → routes)
+> - Sticky left TOC (IntersectionObserver, offset-aware smooth scroll)
+> - Accessible lightbox (Esc/←/→, focus trap, restore focus)
+> - Tailwind v4 tokens + component classes (btn variants, high-contrast theme)
+> - ESLint + `jsx-a11y`; Lighthouse/axe audits clean
 
 <Subhead>Project at a glance</Subhead>
 
@@ -21,11 +29,11 @@ demo:
 - **Stack:** Next.js, TypeScript, Tailwind, MDX  
 - **Accessibility:** WCAG 2.0 AA (AODA); skip link, keyboard-friendly TOC, reduced-motion support; audits: Lighthouse 100, axe DevTools (Free) clean, eslint-plugin-jsx-a11y in CI
 - **Timeline:** 2 weeks (see breakdown below)  
-- **Links:** <a href="/LisaNguyenResume.pdf" target="_blank" rel="noreferrer">Résumé</a> · [Figma Prototype](https://www.figma.com/proto/ev3JHCYyJgBYDc1gCM5ARH/Portfolio?node-id=0-1&t=DGX0Ilqi9XBD2rzU-1)
+- **Links:** <a href="/LisaNguyenResume.pdf" target="_blank" rel="noreferrer">Resume</a> · [Figma Prototype](https://www.figma.com/proto/ev3JHCYyJgBYDc1gCM5ARH/Portfolio?node-id=0-1&t=DGX0Ilqi9XBD2rzU-1)
 
 ## Project Overview
 <Subhead>Problem Statement</Subhead>
-Recruiters often requested a portfolio to validate my abilities, but I didn’t yet have one. I created this project to centralize my work, showcase UI/UX projects, highlight my résumé, and supplement my CV.
+Recruiters often requested a portfolio to validate my abilities, but I didn’t yet have one. I created this project to centralize my work, showcase UI/UX projects, highlight my resume, and supplement my CV.
 
 <Subhead>Goal</Subhead>
 Design and launch a clean, accessible, and responsive portfolio website that communicates my skills and professional presence effectively.
@@ -74,8 +82,10 @@ IT professionals and peers, with an emphasis on accessibility and inclusivity.
     images={[
       { src: "/images/portfolio/axeHomeAudit.png",  alt: "axe DevTools audit summary for the Home page showing 0 critical violations; results panel visible",  caption: "axe DevTools — Home • 0 critical violations • 2025-09-07" },
       { src: "/images/portfolio/axeCaseAudit.png", alt: "axe DevTools audit summary for the Case Study page showing 0 critical violations; results panel visible", caption: "axe DevTools — Case Study • 0 critical violations • 2025-09-07" },
-      { src: "/images/portfolio/lhMobile.png", alt: "Lighthouse Mobile summary for Case Study page showing 100 across all categories; runtime shows emulated mobile on slow 4G\"", caption: "Lighthouse — Case Study (Mobile) • 100/100/100/100 • Emulated Moto G Power, Slow 4G • 2025-09-07" },
-      { src: "/images/portfolio/lhDesktop.png", alt: "Lighthouse Desktop summary for Case Study page showing 100 across all categories; runtime shows desktop emulation", caption: "Lighthouse — Case Study (Desktop) • 100/100/100/100 • Desktop emulation • 2025-09-07" }
+      { src: "/images/portfolio/lhMobile.png", alt: "Lighthouse Mobile summary for Home page showing 100 across all categories; runtime shows emulated mobile on slow 4G\"", caption: "Lighthouse — Home (Mobile) • 100/100/100/100 • Emulated Moto G Power, Slow 4G • 2025-09-07" },
+      { src: "/images/portfolio/lhDesktop.png", alt: "Lighthouse Desktop summary for Home page showing 100 across all categories; runtime shows desktop emulation", caption: "Lighthouse — Home (Desktop) • 100/100/100/100 • Desktop emulation • 2025-09-07" },
+      { src: "/images/portfolio/lhPortfolioDesktop.png", alt: "Lighthouse Desktop summary for Case Study page showing 100 across all categories; runtime shows desktop emulation", caption: "Lighthouse — Case Study (Desktop) • 100/100/100/100 • Desktop emulation • 2025-09-07" },
+      { src: "/images/portfolio/lhPortfolioMobile.png", alt: "Lighthouse Mobile summary for Case Study page showing 100 across all categories; runtime shows desktop emulation", caption: "Lighthouse — Case Study (Mobile) • 100/100/100/100 • Desktop emulation • 2025-09-07" }
     ]}
   />
 </details>
@@ -93,13 +103,13 @@ I reviewed 10+ portfolios on Behance and UXfolio, and also studied sites from se
 **What I avoided:** heavy hero videos, autoplay media, and overly experimental navigation that hurts accessibility.
 
 <Subhead>User Personas</Subhead>
-- **Hiring Manager:** Needs quick access to the résumé and a clear overview of skills  
+- **Hiring Manager:** Needs quick access to the resume and a clear overview of skills  
 - **IT Peer / Collaborator:** Interested in project details and experience for potential collaboration
 
 <Subhead>Storyboarding</Subhead>
 I storyboarded two primary journeys to confirm that navigation supported both hiring and collaboration needs.
 
-- *Recruiter journey:* Lands on home → finds résumé in under 2 seconds → optionally reviews projects for context.  
+- *Recruiter journey:* Lands on home → finds resume in under 2 seconds → optionally reviews projects for context.  
 
 
 - *Peer/collaborator journey:* “See All Projects” → filter → open a case study → try demo.  
@@ -113,25 +123,32 @@ I standardized the navigation bar, project cards, buttons, and footer. Each meet
 
 <Subhead>Design Decisions</Subhead>
 - **Palette:** Switched from pastel to high-contrast after contrast failures; ensures **AA** for default, hover, focus, and disabled states.  
-- **Nav clarity:** Résumé link moved from footer → navbar after **3/5** testers missed it; now **5/5** find it in < 2s.  
+- **Nav clarity:** Resume link moved from footer → navbar after **3/5** testers missed it; now **5/5** find it in < 2s.  
 - **Components:** Button variants with visible focus rings, hover underline, and thicker borders to signal interactivity.
 
 ## User Testing & Feedback
 <Subhead>Participants & Tasks</Subhead>
 - **5 testers** (2 hiring-adjacent, 3 peers)  
-- Tasks: open résumé; find one featured project; navigate to demo; keyboard-only pass
+- Tasks: open resume; find one featured project; navigate to demo; keyboard-only pass
 
 <Subhead>Findings</Subhead>
-- Résumé link in footer **missed by 3/5** → moved to navbar → **5/5** success  
+- Resume link in footer **missed by 3/5** → moved to navbar → **5/5** success  
 - Button hover contrast too subtle → added **border-2** + underline on hover  
 - Case study TOC sticky state jitter → added offset-aware smooth scroll and stable active-section detection
 
 <Subhead>Changes Shipped</Subhead>
-Promoted résumé to main nav; improved button hover/focus; stabilized TOC behavior.
+Promoted resume to main nav; improved button hover/focus; stabilized TOC behavior.
 
 <Subhead>Results</Subhead>
 - Keyboard-only task completion: **100%**  
 - Contrast checks pass (text and interactive states)
+
+<Subhead>Challenges & fixes</Subhead>
+
+- **Contentlayer on Windows (CRLF):** Front-matter booleans and line endings caused parse errors → normalized LF, quoted strings, validated schema.
+- **MDX inside `<details>`:** Markdown isn’t parsed in raw HTML → used `<ul><li>` + ensured image arrays were valid (commas/quotes).
+- **Sticky TOC overlap/jitter:** Added offset-aware smooth scroll and IntersectionObserver with tuned `rootMargin`; moved sticky to a non-overflow wrapper.
+- **Images & performance:** Switched to `next/image` for in-content previews (LCP), kept plain `<img>` inside the lightbox for simplicity; all images have descriptive `alt`.
 
 ## Final Design & Launch
 <Subhead>Outcome</Subhead>

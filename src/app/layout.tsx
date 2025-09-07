@@ -8,7 +8,7 @@ const BP = process.env.NEXT_PUBLIC_BASE_PATH ?? ""; // "" locally, "/my-portfoli
 
 export const metadata: Metadata = {
   title: "Lisa Nguyen - Portfolio",
-  description: "Accessibility-first front-end and UI/UX portfolio. See featured projects, case studies, and résumé.",
+  description: "Accessibility-first front-end and UI/UX portfolio. See featured projects, case studies, and resume.",
   // Must be origin-only:
   metadataBase: new URL("https://nguyen-lisa.github.io"),
 
