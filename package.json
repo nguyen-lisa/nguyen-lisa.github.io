@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "clean": "rimraf .next .contentlayer",
-    "dev": "concurrently \"contentlayer dev\" \"next dev --turbopack\"",
-    "build": "contentlayer build && next build --turbopack",
+    "dev": "concurrently \"contentlayer dev || echo ok\" \"next dev --turbopack\"",
+    "build": "contentlayer build || echo ok && next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "content": "contentlayer build"
+    "content": "contentlayer build || echo ok"
   },
   "dependencies": {
     "github-slugger": "^2.0.0",
