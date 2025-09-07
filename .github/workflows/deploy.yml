@@ -22,10 +22,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
       - run: npm ci
       - run: npm run content || echo "contentlayer warning"
       - run: npm run build
+      - run: touch out/.nojekyll    # ← important for GH Pages (_next/ allowed)
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
