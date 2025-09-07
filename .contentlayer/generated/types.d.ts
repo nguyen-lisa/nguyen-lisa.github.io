@@ -68,10 +68,6 @@ export interface ContentlayerGenTypes {
   dataExports: DataExports
 }
 
-declare global {
-  interface ContentlayerGen extends ContentlayerGenTypes {}
-}
-
 export type DocumentTypeMap = {
   Project: Project
 }

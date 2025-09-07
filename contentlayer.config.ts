@@ -1,8 +1,4 @@
-// contentlayer.config.ts
-// @ts-nocheck
-
 import { defineDocumentType, defineNestedType, makeSource } from "contentlayer/source-files";
-// import remarkGfm from "remark-gfm";            // ⬅️ remove GFM to avoid mdast table crash
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
@@ -48,9 +44,9 @@ export default makeSource({
   mdx: {
     // remarkPlugins: [remarkGfm],             // ⬅️ remove
     rehypePlugins: [
-      rehypeSlug as any,
-      [rehypeAutolinkHeadings as any, { behavior: "wrap" }],
-    ] as any[],
+      rehypeSlug,
+      [rehypeAutolinkHeadings, { behavior: "wrap" }],
+    ] as [],
   },
   // disableImportAliasWarning: true,
 });
