@@ -5,6 +5,7 @@
   "scripts": {
     "clean": "rimraf .next .contentlayer",
     "dev": "concurrently \"contentlayer dev || echo ok\" \"next dev --turbopack\"",
+    "test": "react-scripts test --watchAll=false",
     "build": "contentlayer build || echo ok && next build --turbopack",
     "start": "next start",
     "lint": "eslint",
