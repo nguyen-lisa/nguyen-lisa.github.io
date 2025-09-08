@@ -6,7 +6,7 @@ export const TOOLS = {
   react:    { label: "React" },
   a11y:     { label: "Accessibility" },
   figma:    { label: "Figma" },
-  // add more…
+  balsamiq: { label: "Balsamiq" },
 } as const;
 
 export type ToolKey = keyof typeof TOOLS;
