@@ -1,75 +1,77 @@
 ﻿---
 title: "Client AI Portfolio — Conversational Concept"
-summary: "Freelance UI/UX engagement: chat-focused, accessibility-first portfolio concept with guided prompts. Lo-fi in Balsamiq, hi-fi in Figma."
+summary: "Freelance UI/UX engagement: chat-focused, accessibility-first portfolio concept with guided prompts and an AI-ready chat box. Lo-fi in Balsamiq, hi-fi in Figma."
 date: "2025-09-27"
 categories: ["UI/UX", "Prototype"]
 tools: ["balsamiq", "figma", "a11y"]
 featured: true
-# demo:
-#   label: "Prototype"
-#   url: "https://www.figma.com/"
 ---
 
 ## Executive Summary
-- Designed a **chat-style portfolio** that lets recruiters ask preset questions (about, experience, availability) or browse projects traditionally.
-- Concept balances **guided prompts** (right rail) with a **standard project/resume nav**, so both scanning and conversational behaviors are supported.
-- **Accessibility** was a first-class constraint: high contrast, keyboard operation, visible focus, reduced-motion support.
+- Designed a **chat-style portfolio** so recruiters can ask questions (About, Experience, Availability) or skim **compact project cards** (short blurb + optional Demo/Repo).
+- Introduced an **AI-ready chat box**: works today with **guided prompts** + **scripted answers**, and can plug into an LLM later without UI changes.
+- **Accessibility** was first-class: high contrast, keyboard operation, visible focus, and reduced-motion support (AODA / WCAG 2.0 AA oriented).
 
 <Subhead>Project at a glance</Subhead>
 
-- **Role:** Freelance UI/UX Designer, Accessibility Tester  
-- **Deliverables:** Lo-fi wireframes (Balsamiq), hi-fi flows (Figma), a11y acceptance criteria, developer handoff notes  
+- **Role:** Freelance UI/UX Designer; Accessibility Tester  
+- **Deliverables:** Lo-fi wireframes (Balsamiq), hi-fi flows (Figma), chat UI model, a11y acceptance criteria, developer handoff notes  
 - **Accessibility:** Designed to conform to **WCAG 2.0 Level AA (AODA)**; validated keyboard/focus patterns and reduced-motion behavior  
 - **Timeline:**  
   - Wireframes (Balsamiq): 2025-09-03  
-  - Hi-fi + a11y review: 2025-09-07
-- **Links:** 
+  - **Project hiatus:** 2025-09-04 → present (awaiting client content/brand assets)  
+  - Hi-fi: TBD  
+  - Accessibility review: TBD  
+- **Links:** N/A
 
 ## Context & Objectives
 <Subhead>Client context</Subhead>
-The client wanted a portfolio that communicates signal quickly to hiring teams—without forcing them to read long case studies first.
+The client needs to communicate credibility **in seconds**—fast access to resume, a concise picture of experience, and easy contact—without deep reading.
 
 <Subhead>Objectives</Subhead>
-- **Faster answers:** guided prompts to “Tell me about yourself,” “What tools do you use?”, “What’s your availability?”  
-- **Keep projects first-class:** card grid with clear actions (view demo / read case study).  
-- **Respect accessibility:** predictable layout, headings/landmarks, visible focus, and non-color cues.
+- **Faster answers:** guided prompts for “About me,” “Tools,” and “Availability.”  
+- **Compact projects:** small cards with a **one-line summary** and optional **Demo/Repo** link.  
+- **Accessibility by default:** predictable headings/landmarks, visible focus, and non-color cues.
+
+## AI Chat Box
+<Subhead>How it works today (no backend)</Subhead>
+- **Prompt chips** (About · Experience · Availability · Projects · Resume) populate the input with a suggested question.  
+- **Scripted answers** render as chat bubbles with scannable subheads and links (resume, featured projects).  
+- **Free-text input** is enabled; unknown queries fall back to a helpful menu (“You can ask about…”) instead of dead-ends.
+
+<Subhead>LLM-ready later</Subhead>
+- Same interface; swap the answer source to an API.  
+- **Content model** supports summarization: short bios, one-line project blurbs, tags, and canonical links for grounding.  
+- **Safety & clarity:** an “About summaries” note explains that generated answers are derived from on-page content.
+
+<Subhead>Accessibility patterns (chat)</Subhead>
+- **Keyboard:** Tab to focus input; **Enter** sends; **Shift+Enter** inserts a newline; **Esc** clears suggestion.  
+- **Announce replies:** new assistant messages use `aria-live="polite"` for screen readers.  
+- **Landmarks:** `<main>` contains both chat and the project list; chat header is labeled (“Ask about [user]”).  
+- **Focus:** focus returns to the input after send; visible focus rings throughout.  
+- **Reduced motion:** typing indicators and scroll-to-latest respect `prefers-reduced-motion`.
 
 ## Wireframing & Prototyping
 <Subhead>Wireframe v4 — chat-focused, guided discovery</Subhead>
 
-- **Right-rail prompts** reduce cognitive load and route to key sections quickly.  
-- **Dual navigation** (Projects/Resume *and* conversational prompts) keeps the site scannable.  
-- **Smart chips** near the composer (Availability, Experience, Projects, Resume) provide one-tap shortcuts.  
-- **Accessible defaults:** large targets, clear focus outlines, and a logical tab order.
+- **Right-rail prompts** reduce cognitive load and route to key answers quickly.  
+- **Dual entry paths:** conversational **prompt chips** and **standard nav** (Projects/Resume) for familiar scanning.  
+- **Compact project cards:** title + short blurb + **Demo/Repo** link—keeps the page light and scannable.  
+- **Accessible defaults:** large targets, visible focus, logical tab order, reduced-motion awareness.
 
 <ImageGrid
   images={[
     {
-      src: "/images/aiportfolio/wf-v4.png",
+      src: "/images/aiportfolio/lofiv4.png",
       alt:
-        "Balsamiq wireframe of an AI-style portfolio: header with GitHub/LinkedIn/Resume, left tabs for Prompts and Projects, center chat area with a short bio, right rail with preset questions, project cards with Demo and Ask buttons.",
-      caption: "Balsamiq v4 — chat-focused layout with guided prompts and traditional project access."
+        "Balsamiq wireframe of a conversational portfolio: header with GitHub/LinkedIn/Resume, tabs for Prompts and Projects, center chat, right rail with preset questions, compact project cards with Demo and Repo actions.",
+      caption: "Balsamiq v4 — chat-focused layout with guided prompts and compact project cards."
     }
   ]}
 />
 
-<Subhead>Hi-fi exploration (Figma)</Subhead>
-- High-contrast theme and obvious focus states.  
-- Motion used sparingly; honors `prefers-reduced-motion`.  
-- Labels and headings tuned for screen readers (e.g., “Menu” instead of “TOC”).
-
-## Accessibility & AODA
-- Targeted **WCAG 2.0 AA (AODA)** with checks for keyboard operation, focus visibility, and reduced-motion support (2.1/2.2 relevant criteria).  
-- Verified with **Lighthouse** (A11y 100 on internal builds), **axe DevTools (Free)** spot checks (no critical issues on representative screens), and **Colour Contrast Analyser** for text, buttons, and links.  
-- **Non-color cues** (underline, thicker borders) reinforce state changes beyond color alone.
-
-## Testing & Handoff
-- **Keyboard-only pass** to confirm tab order, focus trapping for overlays, and skip-to-content behavior.  
-- **Handoff package**: component specs (states/roles), tokens, contrast values, motion guidelines, and a11y acceptance criteria for QA.  
-- Provided notes on how to implement with a typical **Next.js/MDX** stack if the client pursues development later.
-
 ## Outcome & Next Steps
-- Client aligned on the chat-focused direction with guided prompts and conventional navigation.  
-- Next: finalize brand visuals, expand component library, and proceed to development with the supplied **a11y acceptance criteria**.
+- Alignment on **chat-first discovery** with **compact project cards** and an **AI-ready chat box** for speed.  
+- **Next:** prepare hi-fi prototype, finalize brand visuals, expand the component library, and hand off for development with the established **WCAG 2.0 AA acceptance criteria**.
 
-> **Note:** This case study showcases **design and a11y validation** deliverables; code implementation is out of scope for this engagement.
+> **Status:** On hold pending client content. Design deliverables are production-ready; development can resume immediately after asset delivery.
