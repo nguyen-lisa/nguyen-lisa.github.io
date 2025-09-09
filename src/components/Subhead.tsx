@@ -4,4 +4,4 @@ export default function Subhead({ children }: { children: React.ReactNode }) {
       {children}
     </span>
   );
-}
+}]
