@@ -1,0 +1,43 @@
+name: CI & Deploy (Pages)
+
+on:
+  pull_request:
+    branches: [ main ]           # verify changes; no deploy
+  push:
+    branches: [ main ]           # deploy only from main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: 'npm' }
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run content || echo "contentlayer warning"
+      - run: npm run build        # proves the site can export
+
+  deploy:
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: 'npm' }
+      - run: npm ci
+      - run: npm run content || echo "contentlayer warning"
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: ./out }
+      - uses: actions/deploy-pages@v4
