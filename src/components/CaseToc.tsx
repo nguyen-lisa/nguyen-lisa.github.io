@@ -116,3 +116,4 @@ export default function CaseToc({ items }: { items: TocItem[] }) {
     </nav>
   );
 }
+]
