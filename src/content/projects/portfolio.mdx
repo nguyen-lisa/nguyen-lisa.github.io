@@ -51,11 +51,6 @@ Designer, Programmer, Prototyper
 - **axe DevTools, Colour Contrast Analyser** – verify WCAG contrast and semantics  
 - **Git + GitHub** – version control and deploy
 
-<Subhead>Success Metrics</Subhead>
-- Increase in interview invitations  
-- Recruiters and peers requesting to view my portfolio  
-- Growth in portfolio website visits
-
 <Subhead>Constraints</Subhead>
 The portfolio needed to be completed quickly to meet application deadlines and be ready for recruiter review.
 
@@ -142,35 +137,27 @@ I standardized the navigation bar, project cards, buttons, and footer. Each meet
 
 ## User Testing & Feedback
 <Subhead>Participants & Tasks</Subhead>
-- **5 testers** (2 hiring-adjacent, 3 peers)  
+- **5 testers** (5 peers, 5 general tech users)  
 - Tasks: open resume; find one featured project; navigate to demo; keyboard-only pass
 
 <Subhead>Findings</Subhead>
-- Resume link in footer **missed by 3/5** → moved to navbar → **5/5** success  
+- Resume link in footer **missed by 8/10 of testers** → moved to navbar → **10/10** success rate
 - Button hover contrast too subtle → added **border-2** + underline on hover  
 - Case study TOC sticky state jitter → added offset-aware smooth scroll and stable active-section detection
 
 <Subhead>Changes Shipped</Subhead>
-Promoted resume to main nav; improved button hover/focus; stabilized TOC behavior.
+Promoted resume to main nav; improved button hover/focus; stabilized Table Of Content behavior.
 
 <Subhead>Results</Subhead>
 - Keyboard-only task completion: **100%**  
 - Contrast checks pass (text and interactive states)
 
-<Subhead>Challenges & fixes</Subhead>
-
-- **Contentlayer on Windows (CRLF):** Front-matter booleans and line endings caused parse errors → normalized LF, quoted strings, validated schema.
-- **MDX inside `<details>`:** Markdown isn’t parsed in raw HTML → used `<ul><li>` + ensured image arrays were valid (commas/quotes).
-- **Sticky TOC overlap/jitter:** Added offset-aware smooth scroll and IntersectionObserver with tuned `rootMargin`; moved sticky to a non-overflow wrapper.
-- **Images & performance:** Switched to `next/image` for in-content previews (LCP), kept plain `<img>` inside the lightbox for simplicity; all images have descriptive `alt`.
-
 ## Final Design & Launch
 <Subhead>Outcome</Subhead>
 A polished, responsive, accessibility-first portfolio that effectively represents my skills and professional identity.  
-[Insert screenshots of desktop and mobile versions, alongside earlier iterations]
 
 <Subhead>Reflection</Subhead>
-Accessibility was the strongest success. **Colour Contrast Analyser** and **axe DevTools** surfaced issues that weren’t always obvious. The main challenge was balancing aesthetics with accessibility—pastel palettes and experimental layouts often conflicted with WCAG, so I prioritized inclusivity and usability. I plan to build a secondary, experimental portfolio to explore unconventional designs while keeping this primary site professional and AA-focused.
+Accessibility was the strongest success. **Color Contrast Analyser** and **axe DevTools** surfaced issues that weren’t always obvious. The main challenge was balancing aesthetics with accessibility—pastel palettes and experimental layouts often conflicted with WCAG, so I prioritized inclusivity and usability. I plan to build a secondary, experimental portfolio to explore unconventional designs while keeping this primary site professional and AA-focused.
 
 ## Images
 <ImageGrid
