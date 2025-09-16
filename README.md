@@ -103,11 +103,5 @@ This is a personal site, but suggestions are welcome via issues or pull requests
 ## Contact
 
 * **Email:** [lisanguyen.tech@yahoo.com](mailto:lisanguyen.tech@yahoo.com)
-* **LinkedIn:** [https://www.linkedin.com/in/lisa-nguyen-48825a160/](https://www.linkedin.com/in/your-handle](https://www.linkedin.com/in/lisa-nguyen-48825a160/)
-
+* **LinkedIn:** [https://www.linkedin.com/in/lisa-nguyen-48825a160/](https://www.linkedin.com/in/lisa-nguyen-48825a160/)
 ---
-
-### Credits
-Code © Lisa Nguyen (MIT). Content © Lisa Nguyen. All rights reserved.
-
-* Thanks to Next.js, Contentlayer, and the open-source ecosystem.
