@@ -125,15 +125,17 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             </div>
 
             {project.thumbnail && (
-              <div className="mt-4 relative w-full h-64 sm:h-80 lg:h-96 rounded-xl overflow-hidden border border-border">
-                <Image
-                  src={project.thumbnail}
-                  alt={project.thumbnailAlt ?? `${project.title} preview`}
-                  fill
-                  sizes="(min-width: 1024px) 960px, 100vw"
-                  className="object-cover"
-                  priority   // keep only here (LCP)
-                />
+              <div className="mt-4 rounded-xl overflow-hidden border border-border">
+                <div className="relative w-full h-50 sm:h-80 lg:h-96 bg-background">
+                  <Image
+                    src={project.thumbnail}
+                    alt={project.thumbnailAlt ?? `${project.title} preview`}
+                    fill
+                    //sizes="(min-width: 1024px) 960px, 100vw"
+                    //className="object-cover object-center scale-[1.16] -translate-y-[0.5px] will-change-transform"
+                    priority // keep only here (LCP)
+                  />
+                </div>
               </div>
             )}
           </header>
