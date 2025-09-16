@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lisa Nguyen — Portfolio
 
-## Getting Started
+A clean, fast personal site built with **Next.js** and **TypeScript** to showcase projects, writing, and experience.
 
-First, run the development server:
+<p align="center">
+  <a href="https://nguyen-lisa.github.io" target="_blank"><b>Live Site → nguyen-lisa.github.io</b></a>
+</p>
+
+---
+
+## Features
+
+* Project gallery with concise case studies
+* About/Resume section
+* MDX notes/blog (Contentlayer)
+* Responsive, accessible UI
+* SEO-friendly metadata & social previews
+
+---
+
+## Tech Stack
+
+* **Framework:** Next.js (App Router; create-next-app)
+* **Language:** TypeScript
+* **Content:** MDX via Contentlayer
+* **Styling:** Tailwind CSS
+
+---
+
+## Getting Started (Local Dev)
+
+Clone and install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# 1) Clone
+git clone https://github.com/nguyen-lisa/nguyen-lisa.github.io.git
+cd nguyen-lisa.github.io
+
+# 2) Install
+npm install  # or: yarn / pnpm / bun
+
+# 3) Run the dev server
+npm run dev   # or: yarn dev / pnpm dev / bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site. Edit files in `src/` — changes hot‑reload instantly.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Content (MDX)
 
-## Learn More
+* Write posts or notes in MDX (location defined by your Contentlayer setup).
+* Contentlayer indexes your MDX so you can query typed content in components.
+* Add frontmatter (title, date, summary, tags) to drive lists, filters, and SEO meta.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Target:** GitHub Pages via GitHub Actions (CI/CD)
 
-## Deploy on Vercel
+* Build a **static export** of the site (`next build && next export`) so the output lives in `out/`.
+* Ensure `next.config.ts` includes `output: 'export'` and any needed image/basePath tweaks for static hosting.
+* Your workflow in `.github/workflows/` builds the site and deploys to **Pages**. Every push to `main` publishes an update.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> GitHub Pages serves static files only, so avoid server‑only Next.js features (e.g., server actions or dynamic routes without pre‑rendering).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Accessibility
+
+* Audited with axe DevTools and Lighthouse; resolved flagged issues where applicable.
+* ARIA labels and roles applied to interactive elements and landmarks for clarity.
+* Keyboard navigation and focus states verified.
+* Semantic HTML landmarks and headings.
+* Descriptive alt text; color contrast checked.
+
+---
+
+## Roadmap / Ideas
+
+* **Project filters** (tags/tech)
+* **Accessible icons/labels** to aid scanning and screen‑reader cues
+* **All Projects** page; **Home** shows **Featured Projects**
+* (Optional) Dark mode toggle
+* (Optional) RSS feed; Open Graph image automation for posts
+
+---
+
+## Contributing
+
+This is a personal site, but suggestions are welcome via issues or pull requests.
+
+---
+
+## License
+
+* **Code:** MIT License.
+* **Content (text/images/case studies):** All Rights Reserved.
+
+---
+
+## Contact
+
+* **Email:** [lisanguyen.tech@yahoo.com](mailto:lisanguyen.tech@yahoo.com)
+* **LinkedIn:** [https://www.linkedin.com/in/lisa-nguyen-48825a160/](https://www.linkedin.com/in/lisa-nguyen-48825a160/)
+---
