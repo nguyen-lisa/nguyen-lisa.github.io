@@ -40,7 +40,6 @@ html { scroll-behavior: smooth; }
   --tw-prose-pre-code:var(--foreground);
   --tw-prose-pre-bg:#1a1a1a;
 }
-:root { --nav-h: 56px; }               
 .prose :is(h2,h3,h4){ scroll-margin-top: calc(var(--nav-h) + 20px); }
 
 @layer base{
@@ -59,9 +58,10 @@ html { scroll-behavior: smooth; }
   .chip:hover,
   .chip:focus-visible { 
     @apply border-2 border-accent text-accent;
-    background: transparent;    /* key: don't fill */
+    background: transparent;
   }
   .chip-active { @apply border-2 border-accent text-accent; }
+
   .btn{
     @apply inline-flex items-center justify-center gap-2 rounded-lg
            px-3 py-1.5 text-sm font-medium
@@ -78,17 +78,16 @@ html { scroll-behavior: smooth; }
   .btn-outline{ @apply border border-border text-text bg-base; }
   .btn-outline:hover{ @apply border-accent bg-accent text-base; }
 
-  /* Filled – Accent (a11y: dark text on light accent) */
+  /* Filled – Accent */
   .btn-accent{ @apply bg-accent text-base border border-accent font-semibold; }
   .btn-accent:hover{ @apply bg-accent-hover border-accent-hover; }
-  /* Belt & suspenders in case other classes force blue text */
   .btn-accent, .btn-accent:hover { color: var(--background) !important; }
 
   /* Filled – White */
   .btn-white{ @apply bg-white text-base border border-white; }
   .btn-white:hover{ @apply bg-zinc-200 border-zinc-200; }
 
-  /* Inline links (use for text links, not buttons) */
+  /* Inline links */
   .link{ @apply underline underline-offset-2 decoration-2 transition; }
   .link:hover{ @apply text-accent decoration-4; }
 
@@ -99,42 +98,47 @@ html { scroll-behavior: smooth; }
   .img-grid img{ @apply w-full h-auto rounded-lg border border-border; }
   .img-grid figure{ margin:0; }
   .img-grid figcaption{ @apply text-xs text-text/70 mt-1; }
-   /* MDX subhead spacing */
+
+  /* MDX subhead spacing */
   .prose .subhead {
     display: block;
     color: color-mix(in oklab, var(--color-text), transparent 30%);
-    margin-top: 0.35rem;   /* default top gap */
+    margin-top: 0.35rem;
     margin-bottom: 0.25rem;
   }
-
-  /* If MDX wrapped it in a <p>, normalize that paragraph's margins */
   .prose p:has(> .subhead) {
     margin-top: 0.35rem;
     margin-bottom: 0.25rem;
   }
-
-  /* Pull Subhead closer when it follows a heading */
   .prose h2 + .subhead,
   .prose h2 + p:has(> .subhead) { margin-top: -0.25rem; }
-
   .prose h3 + .subhead,
   .prose h3 + p:has(> .subhead) { margin-top: -0.2rem; }
-
-  /* Ensure a little space when Subhead follows body elements */
   .prose p + .subhead,
   .prose p + p:has(> .subhead),
   .prose ul + .subhead,
   .prose ol + .subhead,
   .prose pre + .subhead,
-  .prose blockquote + .subhead {
-    margin-top: 0.4rem;
-  }
-
-  /* Keep lists tight after a Subhead */
+  .prose blockquote + .subhead { margin-top: 0.4rem; }
   .prose .subhead + ul,
   .prose .subhead + ol,
   .prose p:has(> .subhead) + ul,
-  .prose p:has(> .subhead) + ol {
-    margin-top: 0.15rem;
-  }
+  .prose p:has(> .subhead) + ol { margin-top: 0.15rem; }
+}
+
+/* -------------------- Next.js <Image fill> helpers -------------------- */
+.next-fill { position: relative; }
+.next-fill > span { position: absolute !important; inset: 0 !important; }
+.next-fill img[data-nimg="fill"]{
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important; /* default */
+}
+
+/* Thumbnail-specific override */
+.thumbnail-container img[data-nimg="fill"]{
+  object-position: center center !important;
 }
