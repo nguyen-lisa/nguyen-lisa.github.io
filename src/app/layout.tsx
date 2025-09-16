@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Lisa Nguyen - Portfolio",
-    description: "Accessibility-first · UI/UX · Front-end",
+    description: "Accessibility-first · UI/UX Design · Full Stack Development",
     url: `${BP}/`,
     siteName: "Lisa Nguyen",
     images: [`${BP}/og/home.png`], // prefix assets with basePath

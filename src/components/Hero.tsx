@@ -9,16 +9,14 @@ export default function Hero() {
       </h1>
 
       <p className="mt-2 text-text/80">
-        Accessibility-first · UI/UX · Front-end
+        Accessibility-first · UI/UX Design · Full Stack Development
       </p>
 
       <p
         id="about-hero"
         className="mt-4 mx-auto max-w-prose text-base sm:text-lg text-text/80"
       >
-        I design and build inclusive, high-contrast interfaces with clear
-        information architecture and strong keyboard support. I care about
-        pragmatic UX, performance, and clean front-end code.
+        IT graduate and full-stack engineer specializing in UI/UX and accessibility. I architect information architecture (IA), create wireframes and interactive prototypes, and ship inclusive, high-contrast interfaces with keyboard-first flows and measurable performance gains. I emphasize pragmatic UX, WCAG-aligned practices (axe/Lighthouse), and resilient, maintainable code across the stack.
       </p>
 
       <div className="mt-6 flex items-center justify-center gap-3 not-prose">
