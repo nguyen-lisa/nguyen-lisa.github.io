@@ -1,0 +1,95 @@
+---
+title: "Next.js E-Commerce Website"
+summary: "A small e-commerce site prototype."
+date: "2025-09-15"
+categories: ["Front-end"]
+tools: ["ts", "react", "nextjs", "nodejs", "git", "a11y", "vercel", "css", "html"]
+featured: false
+demo:
+  label: "Live site"
+  url: "https://beauty-by-aphrodite-website.vercel.app/"
+# repo: "https://github.com/nguyen-lisa/BeautyByAphroditeWebsite"
+---
+
+
+# Beauty By Aphrodite
+
+**Live:** [beauty-by-aphrodite-website.vercel.app](https://beauty-by-aphrodite-website.vercel.app/)  
+**Repo:** [github.com/nguyen-lisa/BeautyByAphroditeWebsite](https://github.com/nguyen-lisa/BeautyByAphroditeWebsite)
+
+I **modernized** an older, mostly static e-commerce site into a **Next.js (App Router)** application with a mobile-first, accessible UX. The visual aesthetic was **client-directed** (freelance) — playful, simple, and product-first.
+
+> **Project status:** The site is intentionally paused at this stage until the client is ready to proceed with payments and to add their own products.  
+> Current products shown are **placeholders**.
+
+---
+
+## Goals
+
+- Replace ad-hoc static pages with a maintainable **App Router** structure.
+- Ship an **accessible** two-row header (always-visible brand row + collapsible mobile nav that takes zero space when closed).
+- Add a **hero** section with clear CTAs (Shop / DM on Instagram).
+- Build **/products** and **/products/[slug]** with a keyboard-friendly **thumbnail gallery**.
+- Start with **JSON product data** and keep a clean path to Prisma/Stripe/Shopify later.
+
+---
+
+## Highlights
+
+- **Hero:** Split layout (image + copy) with primary + ghost CTAs.  
+- **Products:** Grid and detail pages; thumbnails are real **buttons** with `aria-label` and `aria-current` for the active image.  
+- **Styling:** Single `app/globals.css` for predictable, framework-free CSS.  
+- **Deployment:** Vercel with automatic builds on push.
+
+---
+
+## Accessibility & Performance
+
+Audited with **Lighthouse** and **axe DevTools**.  
+All Lighthouse categories currently score **≥ 83/100**; I’m iterating toward **100% accessibility** (contrast, heading order, landmark labels, alt coverage, and focus management).
+
+---
+
+## Tech Stack
+
+- **Framework:** Next.js (App Router)
+- **Language:** JavaScript (React/JSX)
+- **Markup & Styles:** Semantic HTML via React + global CSS (`app/globals.css`)
+- **Tooling:** ESLint (flat config), Lighthouse, axe DevTools
+- **Data (current):** `data/productData.json` (designed to map cleanly to a future Prisma schema)
+- **Hosting:** Vercel
+
+---
+
+## Data & Next Steps
+
+- **Now:** Products come from `data/productData.json` for fast iteration.
+- **Next (when client proceeds):** Optional migration to **Prisma** (SQLite/Postgres), payments via **Stripe** or Shopify, and an admin product flow.
+
+---
+
+## Images
+<ImageGrid
+  images={[
+    {
+      src: "/images/bba/bbaLanding.png",
+      alt: "Landing page hero with brand, headline, and call-to-action buttons",
+      caption: "Landing hero — client-led aesthetic with clear CTAs."
+    },
+    {
+      src: "/images/bba/bbaProducts.png",
+      alt: "Products grid showing cards with images, titles, and prices",
+      caption: "Shop All — responsive grid of product cards."
+    },
+    {
+      src: "/images/bba/bbaAbout.png",
+      alt: "About page with centered content and brand tone",
+      caption: "About — simple content layout with consistent styling."
+    },
+    {
+      src: "/images/bba/bbaItem.png",
+      alt: "Individual product page with main image, thumbnails, and details",
+      caption: "Product detail — accessible media gallery with thumbnails."
+    }
+  ]}
+/>
