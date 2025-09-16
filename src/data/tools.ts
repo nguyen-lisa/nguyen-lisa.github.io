@@ -9,7 +9,10 @@ export const TOOLS = {
   balsamiq: { label: "Balsamiq" },
   css:      { label: "CSS" },
   html:     { label: "HTML" },
-  js:       { label: "JavaScript" }
+  js:       { label: "JavaScript" },
+  ifixit:    { label: "iFixit" },
+  shopify:  { label: "Shopify" },
+  vercel:   { label: "Vercel" }
 } as const;
 
 export type ToolKey = keyof typeof TOOLS;
