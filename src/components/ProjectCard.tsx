@@ -44,7 +44,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       )}
 
       <p className="mt-2 text-sm text-text/80">{project.summary}</p>
-
+        
       {(project.tools?.length ?? 0) > 0 && (
         <ul className="mt-3 flex flex-wrap gap-2">
           {project.tools!.map((raw) => {

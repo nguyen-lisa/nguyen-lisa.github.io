@@ -125,21 +125,18 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             </div>
 
             {project.thumbnail && (
-              <div className="mt-4 relative w-full h-64 sm:h-80 lg:h-96 rounded-xl overflow-hidden border border-border">
-                <Image
-                  src={project.thumbnail}
-                  alt={
-                    project.summary
-                      ? `${project.title} — ${project.summary}`
-                      : `${project.title} preview`
-                  }
-                  fill
-                  className="object-cover"
-                  // Slightly tighter sizes for desktop perf
-                  sizes="(min-width: 1536px) 1100px, (min-width: 1280px) 1000px, (min-width: 1024px) 900px, 100vw"
-                  priority
-                  fetchPriority="high"
-                />
+              <div className="mt-4 rounded-xl border border-border/60 overflow-hidden">
+                <div className="relative w-full aspect-[2/1]">
+                  <Image
+                    src={project.thumbnail}
+                    alt={project.thumbnailAlt ?? `${project.title} preview`}
+                    fill
+                    sizes="(min-width: 1024px) 960px, 100vw"
+                    className="object-cover"
+                    style={{ objectPosition: 'center top' }}
+                    priority
+                  />
+                </div>
               </div>
             )}
           </header>

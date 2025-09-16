@@ -7,6 +7,12 @@ export const TOOLS = {
   a11y:     { label: "Accessibility" },
   figma:    { label: "Figma" },
   balsamiq: { label: "Balsamiq" },
+  css:      { label: "CSS" },
+  html:     { label: "HTML" },
+  js:       { label: "JavaScript" },
+  ifixit:    { label: "iFixit" },
+  shopify:  { label: "Shopify" },
+  vercel:   { label: "Vercel" }
 } as const;
 
 export type ToolKey = keyof typeof TOOLS;
