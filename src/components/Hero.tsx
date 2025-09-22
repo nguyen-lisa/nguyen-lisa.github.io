@@ -32,7 +32,7 @@ export default function Hero() {
 
         {/* Mailto with a prefilled subject */}
         <a
-          href={`mailto:your.email@example.com?subject=${encodeURIComponent(
+          href={`mailto:lisanguyen.tech@yahoo.com?subject=${encodeURIComponent(
             "Portfolio contact — Lisa Nguyen"
           )}`}
           className="btn btn-outline"
