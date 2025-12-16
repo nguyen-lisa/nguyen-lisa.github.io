@@ -1,0 +1,3 @@
+# Keep MD/MDX files as LF (prevents Contentlayer/YAML/MDX issues on Windows)
+*.md  text eol=lf
+*.mdx text eol=lf
