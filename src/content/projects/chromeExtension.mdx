@@ -1,0 +1,254 @@
+---
+title: "Breadcrumbs - Pending Chrome Extension"
+summary: "Accessible Chrome extension that saves highlighted text from any webpage and navigates back to exact passages instantly. Built with vanilla JavaScript and WCAG / AODA compliance."
+date: "2024-12-16"
+categories: ["Front-end", "UI/UX", "Development"]
+tools: ["javascript", "css", "chrome-api", "figma", "a11y", "git"]
+featured: true
+demo:
+  label: "Chrome Web Store"
+  url: "n/a"
+repo: "n/a"
+---
+
+## Executive Summary
+- Built an accessibility-first Chrome extension to solve a common research problem: losing track of important text passages across dozens of tabs.
+- Users can **save highlighted text**, **navigate back instantly**, and have the passage **automatically highlighted** on return.
+- Full keyboard navigation, dark mode persistence, and WCAG / AODA compliance throughout.
+- All data stored locally - complete privacy with no external servers or tracking.
+
+### Tech highlights
+- Vanilla JavaScript with Chrome Extension API (Storage, Context Menus, Scripting, ActiveTab).
+- **Right-click context menu** integration for seamless text saving.
+- **Dark mode** with persistent preference using Chrome Storage API.
+- **Content scripts** for automatic text highlighting and scroll-to-view on page load.
+- Custom scrollbar styling, focus management, and keyboard navigation (Enter/Space/Tab).
+- Quality gates: **Lighthouse 100 accessibility**, **full keyboard navigation verified**.
+
+<Subhead>Project at a glance</Subhead>
+
+- **Role:** UI/UX Designer and Full-Stack Developer  
+- **Stack:** JavaScript, HTML, CSS, Chrome Extension API  
+- **Accessibility:** WCAG / AODA compliant; full keyboard support, high contrast ratios (5.2:1 light, 4.8:1 dark), visible focus indicators (3px outline), ARIA labels throughout
+- **Timeline:** 2 weeks (see breakdown below)  
+- **Links:** Chrome Web Store (pending)
+
+## Project Overview
+<Subhead>Problem Statement</Subhead>
+Researchers, students, and knowledge workers bookmark pages but lose track of the specific passages that matter. Standard bookmarks save URLs, not the exact text, leading to wasted time scrolling through long articles trying to relocate important quotes, statistics, or references.
+
+<Subhead>Goal</Subhead>
+Design and build a lightweight Chrome extension that saves highlighted text from any webpage and enables instant navigation back to the exact passage with automatic highlighting - eliminating endless scrolling.
+
+<Subhead>Role</Subhead>
+UI/UX Designer, Full-Stack Developer
+
+<Subhead>Tools</Subhead>
+- **Figma** - UI mockups and component design  
+- **JavaScript, HTML, CSS** - extension development with vanilla JS (no frameworks)  
+- **Chrome Extension API** - Storage, Context Menus, Scripting, ActiveTab permissions  
+- **Lighthouse** - accessibility validation  
+- **Git + GitHub** - version control
+
+<Subhead>Constraints</Subhead>
+- Must work offline (local storage only, no external servers)
+- Keep extension size under 100KB for fast load times
+- Support both light and dark color schemes
+- Meet WCAG / AODA standards without compromise
+- Complete privacy - no data collection, tracking, or external connections
+
+<Subhead>Timeline (2 Weeks)</Subhead>
+- Research & wireframing: problem validation, lo-fi sketches (1 days)  
+- Core functionality: context menu, storage, breadcrumb display (2 days)  
+- Navigation & highlighting: content scripts, scroll-to-view, auto-highlight (2 days)  
+- Accessibility refinement: keyboard nav, ARIA labels, focus management (2 days)  
+- Polish & testing: dark mode, visual feedback, edge cases (2 days)
+
+## Research & Planning
+<Subhead>Target Audience</Subhead>
+Students, researchers, writers, and anyone who reads extensively online and needs to track important information across multiple sources.
+
+<Subhead>Accessibility & AODA</Subhead>
+
+- Designed to conform to **WCAG / AODA** from the ground up.
+- All interactive elements keyboard accessible (Tab, Enter, Space).
+- Proper ARIA roles (`role="button"`, `role="list"`, `role="status"`), labels, and live regions.
+- Focus management: visible 3px outlines, `:focus-visible` for keyboard-only indicators.
+- Color contrast validated: 5.2:1 (light mode), 4.8:1 (dark mode) exceeding 4.5:1 minimum.
+- Verified with **Lighthouse** (Accessibility 100) and manual keyboard navigation testing.
+
+<Subhead>Privacy & Security</Subhead>
+- **Local storage only** - all data stored on user's device using Chrome Storage API
+- **No external servers** - extension works completely offline
+- **No tracking or analytics** - zero data collection
+- **No account required** - instant use with full privacy
+- **No permissions for browsing history** - only accesses pages when user explicitly saves highlights
+
+## Design System
+<Subhead>Visual Language</Subhead>
+Warm, earthy color palette inspired by breadcrumb trails: coffee browns, cream backgrounds, and amber highlights. Tactile button effects with subtle inset shadows create a faux-3D aesthetic that reinforces interactivity.
+
+<Subhead>Color Palette</Subhead>
+
+**Light Mode:**
+- Primary: `#4b2e20` (coffee brown)
+- Background: `#fdf3e7` (cream)
+- Highlight: `#f8d89a` (golden amber)
+- Selected border: `#5d4a37` (dark walnut)
+
+**Dark Mode:**
+- Primary: `#fcefd9` (light cream)
+- Background: `#271912` (dark espresso)
+- Highlight: `#5c3b27` (burnt umber)
+- Selected border: `#d7b48b` (tan)
+
+All combinations tested and verified to meet WCAG / AODA requirements (4.5:1 minimum).
+
+<Subhead>Component Patterns</Subhead>
+- **Breadcrumb items:** Rounded cards with transparent borders that reveal on hover, 3px border + box-shadow on selection.
+- **Action buttons:** Inset shadow for depth; bolder text + pressed effect on click; disabled state has no visual effects (accessibility requirement).
+- **Toggle button:** Icon-based dark/light mode switcher with smooth opacity transitions between sun/moon icons.
+
+<Subhead>Gestalt Principles Applied</Subhead>
+- **Proximity:** Related elements grouped (title + toggle, breadcrumb list, action buttons).
+- **Similarity:** Consistent styling across all buttons and cards.
+- **Common Region:** Visual separation with borders and subtle backgrounds (action buttons area has 1px top border + rgba background).
+- **Figure-Ground:** High contrast between interactive elements and backgrounds; selected states use multiple cues (color + border + shadow + weight).
+
+## Wireframing & Development
+<Subhead>Information Architecture</Subhead>
+Extension popup divided into three clear regions:
+1. **Header:** Title with logo + dark/light mode toggle
+2. **Main content:** Scrollable list of saved breadcrumbs with empty state messaging
+3. **Actions:** Three buttons (Visit, Remove, Clear All) that enable when breadcrumb selected
+
+<Subhead>Key Features Implemented</Subhead>
+
+**Save Highlights:**
+- Right-click context menu integration ("Save to Breadcrumbs")
+- Captures selected text + page URL
+- Stores data locally using Chrome Storage API
+
+**Navigate Back:**
+- Click breadcrumb to select (visual feedback with border, background, shadow)
+- "Visit" button opens tab and injects content script
+- Content script finds text, scrolls into view, applies highlight styling
+
+**Manage Collection:**
+- "Remove" deletes selected breadcrumb with confirmation
+- "Clear All" deletes entire collection with confirmation
+- Empty state shows helpful instructions: "No breadcrumbs yet... Highlight text on any page, right-click, and save!"
+
+**Dark Mode:**
+- Toggle persists preference between sessions
+- CSS custom properties for theme switching
+- Icons swap with smooth opacity transitions
+
+<Subhead>Accessibility Implementation</Subhead>
+
+**Keyboard Navigation:**
+- All breadcrumb items: `tabindex="0"`, `role="button"`, Enter/Space to select
+- Action buttons: native `<button>` elements with proper labels
+- Focus indicators: 3px solid outline with 3px offset on all interactive elements
+- `:focus-visible` used to show outlines only for keyboard users
+
+**Screen Reader Support:**
+- Breadcrumbs marked as `role="list"` with items as `role="button"`
+- Each item has descriptive `aria-label`: "Breadcrumb 1: [text preview]"
+- Selected state announced with `aria-selected="true"`
+- Live region (`role="status"`, `aria-live="polite"`) announces actions: "Breadcrumb removed", "All breadcrumbs cleared"
+- Buttons have clear `aria-label` attributes: "Navigate to selected breadcrumb", "Delete selected breadcrumb", "Delete all breadcrumbs"
+
+**Visual Accessibility:**
+- High contrast ratios: 5.2:1 (light mode text), 4.8:1 (dark mode text)
+- Multiple selection cues: background color + 3px border + box-shadow + font-weight (not color alone)
+- Disabled buttons: distinct styling (muted color, no shadow, `cursor: not-allowed`)
+- Custom scrollbar with proper contrast against background
+
+## Challenges & Solutions
+<Subhead>Dark Mode Persistence</Subhead>
+**Problem:** Dark mode reset every time popup closed.  
+**Solution:** Implemented Chrome Storage API to save preference; load on `DOMContentLoaded` and apply before render to prevent flash.
+
+<Subhead>Scrollbar Visual Cutoff</Subhead>
+**Problem:** Scrollbar overlapped container border and appeared truncated.  
+**Solution:** Added right padding to container; styled scrollbar thumb with border matching background color for visual separation.
+
+<Subhead>Disabled Button Contrast</Subhead>
+**Problem:** Disabled buttons with `opacity: 0.5` failed WCAG contrast requirements.  
+**Solution:** Removed opacity; used dedicated color variables with tested contrast ratios (5.2:1 light, 4.8:1 dark).
+
+<Subhead>Selection Visibility</Subhead>
+**Problem:** Users couldn't tell which breadcrumb was selected - color change alone insufficient.  
+**Solution:** Multi-indicator approach: background color + 3px border + box-shadow + font-weight increase. Passes non-color accessibility requirements.
+
+<Subhead>Focus Management</Subhead>
+**Problem:** After selecting breadcrumb with keyboard, no clear feedback.  
+**Solution:** Added `highlightDiv.focus()` after selection and proper `aria-selected` state management.
+
+## Testing & Iteration
+<Subhead>Accessibility Testing</Subhead>
+
+**Automated Tools:**
+- **Lighthouse:** Accessibility score 100/100
+
+**Manual Testing:**
+- **Keyboard-only navigation:** Full feature coverage verified
+- **Color blindness simulation:** Selection visible in all modes (Deuteranopia, Protanopia, Tritanopia)
+
+<Subhead>Peer Feedback</Subhead>
+Gathered feedback from peers and friends on usability and accessibility:
+
+**Findings:**
+- Empty state needed clearer instructions - added "Right-click highlighted text to get started"
+- Action button labels unclear - changed "Go to URL" to "Visit", "Clear" to "Remove"
+- Dark mode toggle icon meaning unclear - added hover state with border
+- Selection state too subtle - increased border from 1px to 3px, added outer ring with box-shadow
+
+**Changes Shipped:**
+- Improved empty state messaging
+- Clearer button labels
+- Enhanced selection visual feedback
+- Added confirmation dialogs for destructive actions
+
+## Final Design & Launch
+<Subhead>Outcome</Subhead>
+A lightweight (under 100KB), privacy-first Chrome extension that solves a real research problem while maintaining strong accessibility standards. Every interaction is keyboard-accessible and designed with inclusive principles.
+
+<Subhead>Reflection</Subhead>
+Building accessibility-first from the start saved significant refactoring time. Initial design used lighter colors that failed contrast checks - switching to the warm brown palette early established a strong foundation. The biggest learning was that accessibility requires multiple redundant cues: color, shape, size, shadow, and weight all work together to create inclusive experiences.
+
+**Challenge:** Balancing visual polish with accessibility constraints. Pastel colors and subtle effects often conflicted with WCAG requirements, requiring creative solutions like the multi-indicator selection state.
+
+**Success:** Full keyboard navigation and proper ARIA implementation from the beginning meant no accessibility debt to address later.
+
+## What's Next
+<Subhead>Planned Features</Subhead>
+
+**Citation Management:**
+- Copy breadcrumb text and URL to clipboard in citation format
+- Support for multiple citation styles: MLA, APA, Chicago, IEEE
+- One-click citation copying for academic research
+- Properly formatted with page title, author (if available), access date
+
+**Note-Taking System:**
+- Add personal notes to saved breadcrumbs
+- Comment on why the passage is important
+- Tag system for categorizing breadcrumbs by topic or project
+- Search and filter by notes and tags
+
+<Subhead>Distribution</Subhead>
+- Chrome Web Store listing with optimized screenshots and description
+- Share as personal project on GitHub
+- Document as case study for portfolio
+
+## Images
+<!-- <ImageGrid
+  images={[
+    { src: "/images/breadcrumbs/popup-light.png", alt: "Breadcrumbs extension popup in light mode showing saved highlights", caption: "Light mode interface" },
+  ]}
+/> -->
+
+## Links
+- **Chrome Web Store:** Coming soon
+- **Source Code:** Coming soon
