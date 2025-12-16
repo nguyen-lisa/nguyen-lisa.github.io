@@ -6,10 +6,10 @@
     "clean": "rimraf .next .contentlayer",
     "dev": "concurrently \"contentlayer dev || echo ok\" \"next dev --turbopack\"",
     "test": "react-scripts test --watchAll=false",
-    "build": "contentlayer build || echo ok && next build --turbopack",
+    "build": "npm run content && next build",
     "start": "next start",
     "lint": "eslint",
-    "content": "contentlayer build || echo ok"
+    "content": "contentlayer2 build || echo ok"
   },
   "dependencies": {
     "github-slugger": "^2.0.0",
@@ -23,18 +23,19 @@
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
     "concurrently": "^9.2.1",
-    "contentlayer": "^0.0.0",
+    "contentlayer2": "^0.5.8",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",
+    "next-contentlayer2": "^0.5.8",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.1",
     "rimraf": "^6.0.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5.9.3"
   }
 }
