@@ -2,9 +2,9 @@ name: CI & Deploy (Pages)
 
 on:
   pull_request:
-    branches: [ main ]           # verify changes; no deploy
+    branches: [ main ]
   push:
-    branches: [ main ]           # deploy only from main
+    branches: [ main ]
 
 permissions:
   contents: read
@@ -12,32 +12,31 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: true
 
 jobs:
-  check:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 20, cache: 'npm' }
+        with:
+          node-version: 20
+          cache: npm
       - run: npm ci
       - run: npm run lint
       - run: npm run content || echo "contentlayer warning"
-      - run: npm run build        # proves the site can export
+      - run: npm run build
+      - run: touch out/.nojekyll
+      - run: ls -la out
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
 
   deploy:
-    needs: check
+    needs: build
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 20, cache: 'npm' }
-      - run: npm ci
-      - run: npm run content || echo "contentlayer warning"
-      - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
-        with: { path: ./out }
       - uses: actions/deploy-pages@v4
