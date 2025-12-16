@@ -105,4 +105,4 @@ This is a personal site, but suggestions are welcome via issues or pull requests
 ## Contact
 
 * **Email:** [lisanguyen.tech@yahoo.com](mailto:lisanguyen.tech@yahoo.com)
-* **LinkedIn:** [https://www.linkedin.com/in/lisa-nguyen-48825a160/](https://www.linkedin.com/in/lisa-nguyen-48825a160/)
+* **LinkedIn:** [https://www.linkedin.com/in/lisa-vo-nguyen](https://www.linkedin.com/in/lisa-vo-nguyen/)
