@@ -12,12 +12,12 @@ export const TOOLS = {
   js:       { label: "JavaScript" },
   ifixit:    { label: "iFixit" },
   shopify:  { label: "Shopify" },
-  vercel:   { label: "Vercel" }
+  vercel:   { label: "Vercel" },
+  chromeapi: {label: "Chrome API"}
 } as const;
 
 export type ToolKey = keyof typeof TOOLS;
 
-// Pretty fallback if a key isn’t in TOOLS
 function humanize(s: string) {
   return s
     .replace(/[-_]+/g, " ")

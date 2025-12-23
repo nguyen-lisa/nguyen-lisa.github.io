@@ -11,6 +11,10 @@ import CaseToc, { TocItem } from "@/components/CaseToc";
 import ImageGrid from "@/components/ImageGrid";
 import Subhead from "@/components/Subhead";
 
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
+
 /* ---------- TOC extraction ---------- */
 function extractHeadings(raw: string): TocItem[] {
   const items: TocItem[] = [];
@@ -38,9 +42,11 @@ export function generateStaticParams() {
 
 /* ---------- SEO metadata per project ---------- */
 export async function generateMetadata(
-  { params }: { params: { slug: string } }
+  { params }: PageProps
 ): Promise<Metadata> {
-  const project = allProjects.find((p) => p.slug === params.slug);
+  const { slug } = await params;
+
+  const project = allProjects.find((p) => p.slug === slug);
   if (!project) return { title: "Project not found" };
 
   const url = `/project/${project.slug}`;
@@ -65,8 +71,10 @@ export async function generateMetadata(
 }
 
 /* ---------- Page ---------- */
-export default function CaseStudyPage({ params }: { params: { slug: string } }) {
-  const project = allProjects.find((p) => p.slug === params.slug);
+export default async function CaseStudyPage({ params }: PageProps) {
+  const { slug } = await params;
+
+  const project = allProjects.find((p) => p.slug === slug);
   if (!project) return notFound();
 
   const toc = extractHeadings(project.body.raw);

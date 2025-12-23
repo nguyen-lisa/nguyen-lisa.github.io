@@ -14,7 +14,8 @@ const config = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 
   // Ignore build artifacts
-  { ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts"] },
+  { ignores: ["node_modules/**", ".next/**", ".contentlayer/**", "out/**", "build/**", "next-env.d.ts"] },
+
 
   // Accessibility rules
   {

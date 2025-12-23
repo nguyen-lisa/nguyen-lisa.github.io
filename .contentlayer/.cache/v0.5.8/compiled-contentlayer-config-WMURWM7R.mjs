@@ -1,5 +1,5 @@
 // contentlayer.config.ts
-import { defineDocumentType, defineNestedType, makeSource } from "contentlayer/source-files";
+import { defineDocumentType, defineNestedType, makeSource } from "contentlayer2/source-files";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 var Demo = defineNestedType(() => ({
@@ -17,13 +17,15 @@ var Project = defineDocumentType(() => ({
     title: { type: "string", required: true },
     summary: { type: "string", required: true },
     date: { type: "date", required: true },
-    categories: { type: "list", of: { type: "string" } },
-    tools: { type: "list", of: { type: "string" } },
-    featured: { type: "boolean", default: false },
-    thumbnail: { type: "string" },
-    ogImage: { type: "string" },
-    demo: { type: "nested", of: Demo },
-    repo: { type: "string" }
+    categories: { type: "list", of: { type: "string" }, required: false },
+    tools: { type: "list", of: { type: "string" }, required: false },
+    featured: { type: "boolean", required: false, default: false },
+    thumbnail: { type: "string", required: false },
+    thumbnailAlt: { type: "string", required: false },
+    // used for <Image> alt fallback
+    ogImage: { type: "string", required: false },
+    demo: { type: "nested", of: Demo, required: false },
+    repo: { type: "string", required: false }
   },
   computedFields: {
     slug: {
@@ -37,10 +39,11 @@ var Project = defineDocumentType(() => ({
   }
 }));
 var contentlayer_config_default = makeSource({
+  // your MDX lives under src/content
   contentDirPath: "src/content",
   documentTypes: [Project],
   mdx: {
-    // remarkPlugins: [remarkGfm],             // ⬅️ remove
+    // remarkPlugins: [],
     rehypePlugins: [
       rehypeSlug,
       [rehypeAutolinkHeadings, { behavior: "wrap" }]
@@ -52,4 +55,4 @@ export {
   Project,
   contentlayer_config_default as default
 };
-//# sourceMappingURL=compiled-contentlayer-config-QLKF7KL3.mjs.map
+//# sourceMappingURL=compiled-contentlayer-config-WMURWM7R.mjs.map
