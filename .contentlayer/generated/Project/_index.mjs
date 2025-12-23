@@ -5,5 +5,6 @@ import projects__bbaECommerceMdx from './projects__bbaECommerce.mdx.json' with {
 import projects__chromeExtensionMdx from './projects__chromeExtension.mdx.json' with { type: 'json' }
 import projects__keycapsGuideMdx from './projects__keycapsGuide.mdx.json' with { type: 'json' }
 import projects__portfolioMdx from './projects__portfolio.mdx.json' with { type: 'json' }
+import projects__ysoaUiMdx from './projects__ysoaUI.mdx.json' with { type: 'json' }
 
-export const allProjects = [projects__aiportfolioMdx, projects__bbaECommerceMdx, projects__chromeExtensionMdx, projects__keycapsGuideMdx, projects__portfolioMdx]
+export const allProjects = [projects__aiportfolioMdx, projects__bbaECommerceMdx, projects__chromeExtensionMdx, projects__keycapsGuideMdx, projects__portfolioMdx, projects__ysoaUiMdx]
