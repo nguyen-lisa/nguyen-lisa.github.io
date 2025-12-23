@@ -97,7 +97,7 @@ This is a personal site, but suggestions are welcome via issues or pull requests
 
 ## License
 
-* **Code:** MIT License.
+* **Code:** Copyright (c) 2025, Lisa Nguyen
 * **Content (text/images/case studies):** All Rights Reserved.
 
 ---
