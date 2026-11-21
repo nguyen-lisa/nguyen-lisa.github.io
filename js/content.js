@@ -135,7 +135,7 @@ const PROJECTS = [
   {
     id: "breadcrumbs",
     title: "Breadcrumbs",
-    summary: "An accessibility-first Chrome extension that saves highlighted text from any webpage and takes you back to the exact passage in one click. Built with vanilla JavaScript to meet WCAG and the AODA.",
+    summary: "An accessibility-first Chrome extension, that works on chromium-based browsers, saves highlighted text from any webpage and takes you back to the exact passage in one click. Built with vanilla JavaScript to meet WCAG and the AODA.",
     year: "2026",
     role: "UI/UX designer and full-stack developer",
     timeline: "2 weeks",
