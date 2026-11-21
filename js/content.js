@@ -135,7 +135,7 @@ const PROJECTS = [
   {
     id: "breadcrumbs",
     title: "Breadcrumbs",
-    summary: "An accessibility-first Chrome extension, that works on chromium-based browsers, saves highlighted text from any webpage and takes you back to the exact passage in one click. Built with vanilla JavaScript to meet WCAG and the AODA.",
+    summary: "An accessibility-first Chrome extension, that works on chromium-based browsers (e.g. Chrome, Edge, Brave), saves highlighted text from any webpage and takes you back to the exact passage in one click. Built with vanilla JavaScript to meet WCAG and the AODA.",
     year: "2026",
     role: "UI/UX designer and full-stack developer",
     timeline: "2 weeks",
@@ -428,7 +428,7 @@ const PROJECTS = [
         text: [
           "The desktop comes from Emily Is Away, a game told entirely through a chat client on a Windows XP-style desktop, modelled on the early-to-mid 2000s versions of ICQ and AOL Instant Messenger. I borrowed that feeling for the Messages window, which answers like an old instant-messenger away message.",
           "The wallpaper is my take on the classic Windows XP landscape, the rolling green hills under a wide blue sky that greeted everyone who turned on a computer in the 2000s. I redrew it as pixel art, with a night version for dark mode.",
-          "The pixel art style and the dreamy feel come from Stardew Valley and Celeste. Stardew Valley gave me the cozy side: soft colours, chunky pixel icons, a little cabin and drifting clouds. Celeste gave me its glowing night skies, layered mountain silhouettes and sparkle effects. I wanted the site to feel as warm as one and as atmospheric as the other."
+          "The pixel art style and the dreamy feel come from Stardew Valley and Celeste. Stardew Valley gave me the cozy side: soft colours, chunky pixel icons, and drifting clouds. Celeste gave me its glowing night skies, layered mountain silhouettes and sparkle effects. I wanted the site to feel as warm as one and as atmospheric as the other."
         ],
         // Your inspiration board. Use your own photos and sketches; for game
         // screenshots, name the game in the caption.
