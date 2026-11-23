@@ -1,29 +1,3 @@
-/* ======================================================================
-   PORTFOLIO CONTENT  (js/content.js)
-   Everything visitors read lives in this file. Change the text in quotes.
-   You never need to touch js/app.js or css/styles.css to update content.
-
-   WHAT'S IN THIS FILE, TOP TO BOTTOM
-     SITE      switch features on or off
-     WINDOWS   which windows exist, their order, names and colours
-     PROFILE   your name, intro, bio, contact links
-     PROJECTS  case studies (add or delete freely)
-     CV        your CV, plus the link to the PDF download
-     CHAT      the Messages auto-reply
-
-   ADD A PROJECT     Copy one { ... } block inside PROJECTS, paste it after
-                     the last one (mind the comma between blocks), give it a
-                     new id, and change the text. There's a blank template at
-                     the end of the list.
-   DELETE A PROJECT  Remove its whole { ... } block and the comma after it.
-
-   The Work window, its count, the Previous/Next buttons, the chat's
-   "best work" answer and links such as  yoursite.com/#case-lull  all
-   update on their own.
-   ====================================================================== */
-
-/* SITE: turn features on or off. Visitors can still mute sound and
-   pause animation from the top bar. */
 const SITE = {
   sounds: true,            // hover and click sounds
   animatedSky: true,       // drifting clouds and twinkling stars
@@ -51,28 +25,16 @@ const SITE = {
    iconImage  your own artwork instead of the pixel icon, e.g. "icons/goals.png"
    color    "pink", "butter", "mint", "lilac", "sky" or "peach"
    width/height  starting size in rem (16px each); it shrinks to fit small screens
-   id       lowercase letters, numbers and hyphens. It's also the link: yoursite.com/#about */
-// Your own icons: add iconImage: "icons/work.png" to a line. One image works
-// in both themes.
+   id       lowercase letters, numbers and hyphens. */
+
 const WINDOWS = [
   { id: "about",    title: "About me", type: "about",    icon: "about",    iconImage: "icons/aboutme.png", color: "pink",   width: 38, height: 40 },
   { id: "work",     title: "Work",     type: "work",     icon: "work", iconImage: "icons/work.png",     color: "butter", width: 48, height: 41 },
   { id: "cv",       title: "CV",       type: "cv",       icon: "cv", iconImage: "icons/cv.png",       color: "mint",   width: 42, height: 42 },
   { id: "messages", title: "Messages", type: "messages", icon: "messages", iconImage: "icons/messages.png", color: "lilac",  width: 24, height: 38 },
   { id: "goals",    title: "Goals",    type: "goals",    icon: "goals", iconImage: "icons/goals.png",    color: "peach",  width: 32, height: 36, menu: false, side: "right" },
-  // Affirmations is hidden for now. To bring it back, delete the // at the start of the next line
-  // (and in the "notes" answer in CHAT).
+  // Affirmations is hidden for now and in the "notes" answer in CHAT
   // { id: "notes",    title: "Affirmations", type: "affirmations", icon: "notes", iconImage: "icons/affirmations.png", color: "butter", width: 26, height: 30, menu: false, side: "right" }
-
-  /* EXAMPLE: a new window takes one line plus its sections. Add a comma
-     after the line above, then paste this (without the slash-star lines).
-  { id: "playground", title: "Playground", type: "page", icon: "case", color: "sky", width: 40, height: 36,
-    status: "Small experiments",
-    sections: [
-      { heading: "Things I make for fun", text: "Write a short intro here." },
-      { heading: "Recent experiments", list: ["One thing", "Another thing"] }
-    ] }
-  */
 ];
 
 const PROFILE = {
@@ -101,8 +63,6 @@ const PROFILE = {
     { title: "Accessible from the first sketch", text: "I design to WCAG 2.2 AA and the AODA from the first wireframe, so contrast, focus order and plain language are settled before visual polish." },
     { title: "Designs I can build", text: "Semantic HTML, CSS and JavaScript, so what I hand over already works with a keyboard and a screen reader." }
   ],
-  // About me: the human side. Fill in the [square brackets].
-  // "lang" is the language code (fr, es, tl, zh, ar, pa...) so screen readers pronounce the greeting correctly.
   languages: [
     { name: "English", level: "Fluent", greeting: "Hello", lang: "en" },
     { name: "Vietnamese", level: "Intermediate", greeting: "Xin chào", lang: "vi" },
@@ -129,8 +89,7 @@ const PROFILE = {
              text (one string, or a list of paragraphs), quote, list, steps,
              highlights, metrics, and image: { src, alt, caption }.
    links     buttons under the summary, e.g. [{ label: "Get it on the Chrome Web Store", url: "https://..." }]
-   draft     true shows a "Draft" tag. Set showDrafts: false in SITE to hide every draft.
-   Leave out anything you don't need. Full examples of every section type are in js/examples.js. */
+   draft     true shows a "Draft" tag. Set showDrafts: false in SITE to hide every draft. */
 const PROJECTS = [
   {
     id: "breadcrumbs",
@@ -472,9 +431,7 @@ const PROJECTS = [
     ]
   }
 
-  /* TEMPLATE: to add a project, put a comma after the block above, then paste
-     a copy of this block (without the slash-star lines) and fill it in.
-  {
+  /* TEMPLATE:
     id: "new-project",
     title: "Project name",
     summary: "One sentence on what it is and who it's for.",
@@ -519,10 +476,6 @@ const GOALS = {
   ]
 };
 
-/* ART: swap in your own artwork. Leave a line empty ("") to keep the
-   built-in art. Pixel art can be drawn small: it's scaled up with crisp pixels.
-   Desktop icons are set per window with iconImage in WINDOWS, and case study
-   covers with cover: { image } in PROJECTS. The README has sizes for everything. */
 const ART = {
   caseStudyIcon: "",       // the small icon on every case study window, e.g. "art/case.png"
   konamiHint: "",          // the faint easter-egg hint under your name, one strip image
@@ -539,17 +492,9 @@ const ART = {
   cursorHotspot: [0, 0],   // the pixel that clicks, counted from the top-left
   cursorHand: "",          // pointer over buttons and links
   cursorHandHotspot: [8, 0],
-  // Moving pieces: you draw them, the code only moves, twinkles and fades them.
-  // Leave any empty to keep the built-in one. Draw them at your wallpaper's pixel
-  // size (one sprite pixel = one wallpaper pixel). Without your own wallpaper,
-  // one sprite pixel shows as 4 screen pixels.
   sprites: {
     clouds: [],            // 2 to 4 cloud shapes, e.g. ["art/cloud-1.png", "art/cloud-2.png"]: drift across the sky
     sparkle: "",           // twinkles in the sky, and bursts on clicks, the pointer trail and fireworks
-    // Optional extras, only if you want them later:
-    star: "",              // a separate night star (otherwise your sparkle is used)
-    smoke: "",             // a chimney puff, with smokeFrom below
-    shootingStar: ""       // crosses the night sky now and then
   },
   // Only needed with your own wallpaper, in your wallpaper's pixels:
   animate: {
@@ -596,9 +541,6 @@ const AFFIRMATIONS = [
 ];
 
 const CV = {
-  // The PDF is a separate file so its formatting stays exactly as you made it.
-  // Export your CV as a PDF, save it as cv.pdf next to index.html (replacing
-  // the sample), or change this to its file name. Leave empty ("") to hide the button.
   pdf: "LisaVoNguyenResume.pdf",
   summary: "Currently SWE AI trainer with experience in front-end development, UI/UX design, and robotics.",
   experience: [
@@ -626,9 +568,6 @@ const CV = {
   updated: "November 2026"
 };
 
-/* The chat answers in your voice. {name}, {firstName}, {email}, {location}
-   and {time} (your local time) are filled in for you. Each suggested question
-   is a button; "keywords" let typed questions find the right answer. */
 const CHAT = {
   status: "Away from my desk, auto-reply is on",
   intro: [
@@ -636,7 +575,6 @@ const CHAT = {
     "I'm away from my desk, so this auto-reply is answering for me. I wrote every answer myself. Pick a question below or type your own."
   ],
   placeholder: "Type your own question",
-  // A short hint under the box, so people know which words get good answers.
   typeHint: "Try words like work, process, hiring, contact, languages or hobbies.",
   // Pause between questions, in milliseconds. Suggested questions and Send
   // wait while an answer is being typed, then for this long after it.
@@ -685,7 +623,7 @@ const CHAT = {
         "Ask me about perfume and I'll tell you about notes, accords and my current favourite."
       ] }
   ],
-  // Answered when someone types a matching question. These have no button.
+  // Answered when someone types a matching question.
   extras: [
     { id: "tools", keywords: ["tool", "figma", "software", "stack", "code", "html", "css"],
       answer: ["For design: Figma and Balsamiq for wireframes and prototypes. For code: HTML, CSS, JavaScript, React and TypeScript, plus Bootstrap and Tailwind CSS. I check accessibility with axe DevTools, the Colour Contrast Analyzer and a keyboard."] },
