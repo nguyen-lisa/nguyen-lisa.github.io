@@ -1,7 +1,3 @@
-/* Layout: a portfolio dressed as a pastel retro desktop. Menu bar on top, the
-   intro sits on the wallpaper, shortcuts run down the left, and About, Work and
-   CV open as movable windows whose striped title bar matches their icon colour.
-   The one bold element is the dithered pixel sky: clouds by day, stars by night. */
 :root {
   /* Daydream (light) */
   --ink: #2B2145;          /* midnight plum: text and outlines */
@@ -842,7 +838,7 @@ html.pixel-cursor [aria-disabled="true"] { cursor: wait; }
 .chips-more[hidden] { display: none; }
 .chat-hint { padding: 0 .75rem .65rem; margin-top: -.35rem; font-size: .8125rem; color: var(--ink-soft); }
 
-/* button symbols you draw, filled with the theme's text colour */
+/* button symbols, filled with the theme's text colour */
 .glyph-mask {
   display: block; width: 16px; height: 16px; background: currentColor;
   -webkit-mask: var(--glyph) center / contain no-repeat; mask: var(--glyph) center / contain no-repeat;
