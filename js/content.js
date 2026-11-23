@@ -73,8 +73,7 @@ const PROFILE = {
   hobbies: ["Cooking", "Reading", "Video games", "Crochet", "Photography", "Fashion"],
   talkAbout: "I could talk about languages and perfumes for hours.",
   values: [
-    "Diversity shapes how I design. The people I make things for speak different languages, come from different cultures and use technology in different ways, so I design with them, not just for them.",
-    "[What diversity and multicultural community mean to you personally: where you grew up, the communities you're part of, a moment that changed how you see it.]"
+    "Diversity shapes how I design. The people I make things for speak different languages, come from different cultures and use technology in different ways, so I design with them, not just for them."
   ],
   updated: "November 2026"
 };
@@ -105,7 +104,7 @@ const PROJECTS = [
     color: "sky",
     cover: { image: "art/breadcrumbs-cover.jpg", alt: "The Breadcrumbs popup side by side in light and dark mode, listing four saved highlights with one selected, above the Visit, Remove and Clear All buttons" },
     links: [
-      { label: "Get it on the Chrome Web Store", url: "" }   // paste the store URL between the quotes to show this button
+      { label: "Get it on the Chrome Web Store", url: "https://chromewebstore.google.com/detail/bebinigokcogpmphpgekjghamchhmebc?utm_source=item-share-cb" }
     ],
     sections: [
       { heading: "Overview",
@@ -136,8 +135,6 @@ const PROJECTS = [
           { title: "Accessibility (2 days)", text: "Keyboard navigation, ARIA labels and focus management." },
           { title: "Polish and testing (2 days)", text: "Dark mode, visual feedback and edge cases." }
         ] },
-      /* Photos of your process. This section stays hidden until at least one
-         src is filled in. Put the files in the art folder, e.g. "art/breadcrumbs-sketch.jpg". */
       { heading: "Sketches and screens",
         layout: "wide",
         gallery: [
@@ -217,16 +214,16 @@ const PROJECTS = [
     id: "nail-shop",
     title: "Nail shop",
     summary: "A finished freelance project: I rebuilt a press-on nail business's older, mostly static shop as the front-facing, skeletal Next.js site my client asked for, mobile-first and accessible, in her playful, product-first style.",
-    year: "",   // add the year, e.g. "2025"
+    year: "2025",  
     role: "Front-end developer and designer (freelance)",
     team: "Me and my client",
     platform: "Responsive web",
     tools: "Next.js (App Router), React, JavaScript, CSS, ESLint, Lighthouse, axe DevTools, Vercel",
     tags: ["Client project", "Delivered", "Next.js"],
     color: "pink",
-    cover: { text: "Coming soon" },   // swap for { image: "...", alt: "..." } once you have screenshots without the client's branding
+    cover: { text: "Coming soon" },   
     links: [
-      { label: "View the demo shop", url: "" }   // paste the demo link between the quotes
+      { label: "View the demo shop", url: "https://beauty-by-aphrodite-website.vercel.app/" }  
     ],
     sections: [
       { heading: "The client",
@@ -244,9 +241,6 @@ const PROJECTS = [
           "A product list and product pages with a photo gallery that works with a keyboard",
           "Product data in a simple JSON file to start, with a clean path to Prisma, Stripe or Shopify later"
         ] },
-      /* Screenshots go here once the client's name, Instagram handle and placeholder
-         photos are removed from the shop. Add them as gallery items, e.g.
-         gallery: [{ src: "art/shop-home.jpg", alt: "...", caption: "..." }] */
       { heading: "Screenshots",
         text: "Coming soon." },
       { heading: "What I built",
@@ -275,12 +269,10 @@ const PROJECTS = [
     ]
   },
   {
-    /* A self-initiated redesign. Keep "Concept" in the tags so nobody
-       mistakes it for work commissioned by Yale. */
     id: "yale-art",
     title: "Yale School of Art redesign",
     summary: "A concept redesign of a famously chaotic website into a clean, accessible and functional experience that still feels like an art school.",
-    year: "",   // add the year of this redesign, e.g. "2025"
+    year: "2025",  
     role: "UI/UX designer",
     timeline: "1 day",
     team: "Solo",
@@ -389,8 +381,6 @@ const PROJECTS = [
           "The wallpaper is my take on the classic Windows XP landscape, the rolling green hills under a wide blue sky that greeted everyone who turned on a computer in the 2000s. I redrew it as pixel art, with a night version for dark mode.",
           "The pixel art style and the dreamy feel come from Stardew Valley and Celeste. Stardew Valley gave me the cozy side: soft colours, chunky pixel icons, and drifting clouds. Celeste gave me its glowing night skies, layered mountain silhouettes and sparkle effects. I wanted the site to feel as warm as one and as atmospheric as the other."
         ],
-        // Your inspiration board. Use your own photos and sketches; for game
-        // screenshots, name the game in the caption.
         gallery: [
           { src: "", alt: "", caption: "[My moodboard: colours, skies and pixel art I collected]" },
           { src: "", alt: "", caption: "[First pixel sketches of the day hills]" },
