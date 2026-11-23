@@ -1,12 +1,3 @@
-/* ======================================================================
-   APP CODE  (js/app.js)
-   You don't need to edit this file to change content: see js/content.js
-   and README.md. Sections, in order:
-     helpers -> pixel art (PIX icons, GLYPH symbols) -> preferences
-     -> sound (SOUNDS, Sound) -> pixel sky (Sky) -> window types (TYPES)
-     -> window manager (WM) -> builders for each window (About, Goals, Work,
-     Case study, CV, Messages) -> menu bar and icons -> events -> start
-   ====================================================================== */
 (function () {
   'use strict';
 
